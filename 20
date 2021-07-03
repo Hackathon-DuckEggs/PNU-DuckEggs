@@ -1,0 +1,281 @@
+<div id="categoryHoverLayer20" class="category_hover_layer new_hover_layer" style="display:none">
+   <p class="screen_out screen_behind">여행/항공/호텔 메뉴 하위 카테고리</p>
+   <div class="top_category_clear2">
+      <div class="category_unit_wrap new_unit_wrap">
+         <ul class="depth1_list">
+            <li class="depth1 blue_depth linkType " group-code="20" category-code="20_18274469"><a class="btn_cate_01 btn_cate_03" href="http://tour.danawa.com/sale" target="U" onclick="_trkEventLog('ca_여행/항공/호텔_긴급모객');">긴급모객</a></li>
+            <li class="depth1 dp_dot " group-code="20" category-code="20_1"><a href="#" class="btn_cate_02" onclick="return false;">패키지/자유여행</a></li>
+            <li class="depth1 blue_depth linkType " group-code="20" category-code="20_424"><a class="btn_cate_01 btn_cate_03" href="http://tour.danawa.com/flights" target="U" onclick="_trkEventLog('ca_여행/항공/호텔_항공');">항공</a></li>
+            <li class="depth1 blue_depth linkType " group-code="20" category-code="20_427"><a class="btn_cate_01 btn_cate_03" href="http://tour.danawa.com/hotel" target="U" onclick="_trkEventLog('ca_여행/항공/호텔_호텔');">호텔</a></li>
+            <li class="depth1 blue_depth linkType " group-code="20" category-code="20_9265975"><a class="btn_cate_01 btn_cate_03" href="https://www.myrealtrip.com/?b2b-partner=tourdanawa" target="U" onclick="_trkEventLog('ca_여행/항공/호텔_현지투어');">현지투어</a></li>
+            <li class="depth1 blue_depth linkType " group-code="20" category-code="20_405"><a class="btn_cate_01 btn_cate_03" href="http://tour.danawa.com/local" target="U" onclick="_trkEventLog('ca_여행/항공/호텔_국내/제주여행');">국내/제주여행</a></li>
+            <li class="depth1 dp_dot " group-code="20" category-code="20_22910"><a href="#" class="btn_cate_02" onclick="return false;">여행용품</a></li>
+            <li class="depth1 dp_dot " group-code="20" category-code="20_22912"><a href="#" class="btn_cate_02" onclick="return false;">해외입장권/패스</a></li>
+         </ul>
+         <div class="category_all_dot" group-code="20"><a href="#" class="btn_cate_allmenu"><span class="ico_all_cate">메뉴</span><span class="cate_txt_01">카테고리 전체보기</span></a></div>
+      </div>
+      <div id="categoryUnit20_22910" class="two_depth_over" style="display:none;top:126px;">
+         <!-- style로 유동적 조정 (li분리) -->
+         <h4 class="screen_out">두번째 카테고리</h4>
+         <ul class="depth1_list depth1_list2 depth1_list3">
+            <!-- 선택된 dot링크형태: active_on 클래스 추가, 글씨옆 파란색 화살표 a 태그에 : btn_cate_02 -->
+            <li class="depth1 arw_on" group-code="20" category-code="20_22915">
+               <!-- 오른쪽에 화살표추가시 arw_on  추가 --><a href="http://prod.danawa.com/list/?cate=20222915&15main_20_02" class="btn_cate_02">여행 가방/소품</a>
+            </li>
+            <li class="depth1 arw_on" group-code="20" category-code="20_22914">
+               <!-- 오른쪽에 화살표추가시 arw_on  추가 --><a href="http://prod.danawa.com/list/?cate=20222914&15main_20_02" class="btn_cate_02">물놀이 용품</a>
+            </li>
+            <li class="depth1 arw_on" group-code="20" category-code="20_22925">
+               <!-- 오른쪽에 화살표추가시 arw_on  추가 --><a href="http://prod.danawa.com/list/?cate=20222925&15main_20_02" class="btn_cate_02">여행용 화장품</a>
+            </li>
+            <li class="depth1 arw_on" group-code="20" category-code="20_22956">
+               <!-- 오른쪽에 화살표추가시 arw_on  추가 --><a href="http://prod.danawa.com/list/?cate=20222956&15main_20_02" class="btn_cate_02">여행용 유아용품</a>
+            </li>
+            <li class="depth1 arw_on" group-code="20" category-code="20_22916">
+               <!-- 오른쪽에 화살표추가시 arw_on  추가 --><a href="http://prod.danawa.com/list/?cate=20222916&15main_20_02" class="btn_cate_02">휴대용 가전용품</a>
+            </li>
+         </ul>
+      </div>
+      <div id="categoryUnit20_22912" class="two_depth_over" style="display:none;top:126px;">
+         <!-- style로 유동적 조정 (li분리) -->
+         <h4 class="screen_out">두번째 카테고리</h4>
+         <ul class="depth1_list depth1_list2 depth1_list3">
+            <!-- 선택된 dot링크형태: active_on 클래스 추가, 글씨옆 파란색 화살표 a 태그에 : btn_cate_02 -->
+            <li class="depth1" group-code="20" category-code="20_22917">
+               <!-- 오른쪽에 화살표추가시 arw_on  추가 --><a href="http://prod.danawa.com/list/?cate=20222917&15main_20_02" class="btn_cate_02">해외 입장권</a>
+            </li>
+            <li class="depth1" group-code="20" category-code="20_22918">
+               <!-- 오른쪽에 화살표추가시 arw_on  추가 --><a href="http://prod.danawa.com/list/?cate=20222918&15main_20_02" class="btn_cate_02">해외 교통패스</a>
+            </li>
+            <li class="depth1" group-code="20" category-code="20_22919">
+               <!-- 오른쪽에 화살표추가시 arw_on  추가 --><a href="http://prod.danawa.com/list/?cate=20222919&15main_20_02" class="btn_cate_02">해외 유심/와이파이</a>
+            </li>
+            <li class="depth1" group-code="20" category-code="20_37819">
+               <!-- 오른쪽에 화살표추가시 arw_on  추가 --><a href="http://prod.danawa.com/list/?cate=20237819&15main_20_02" class="btn_cate_02">해외숙박/식사권</a>
+            </li>
+            <li class="depth1" group-code="20" category-code="20_34611">
+               <!-- 오른쪽에 화살표추가시 arw_on  추가 --><a href="http://prod.danawa.com/list/?cate=20234611&15main_20_02" class="btn_cate_02">해외패키지</a>
+            </li>
+         </ul>
+      </div>
+      <div id="categoryUnit20_1" class="two_depth_over" style="display:none;top:126px;">
+         <!-- style로 유동적 조정 (li분리) -->
+         <h4 class="screen_out">두번째 카테고리</h4>
+         <ul class="depth1_list depth1_list2 depth1_list3">
+            <!-- 선택된 dot링크형태: active_on 클래스 추가, 글씨옆 파란색 화살표 a 태그에 : btn_cate_02 -->
+            <li class="depth1 arw_on" group-code="20" category-code="20_2">
+               <!-- 오른쪽에 화살표추가시 arw_on  추가 --><a href="http://tour.danawa.com/2"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_동남아/대만')" class="btn_cate_02">동남아/대만</a>
+            </li>
+            <li class="depth1 arw_on" group-code="20" category-code="20_66">
+               <!-- 오른쪽에 화살표추가시 arw_on  추가 --><a href="http://tour.danawa.com/66"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_중국/홍콩')" class="btn_cate_02">중국/홍콩</a>
+            </li>
+            <li class="depth1 arw_on" group-code="20" category-code="20_146">
+               <!-- 오른쪽에 화살표추가시 arw_on  추가 --><a href="http://tour.danawa.com/146"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_일본')" class="btn_cate_02">일본</a>
+            </li>
+            <li class="depth1 arw_on" group-code="20" category-code="20_216">
+               <!-- 오른쪽에 화살표추가시 arw_on  추가 --><a href="http://tour.danawa.com/216"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_남태평양')" class="btn_cate_02">남태평양</a>
+            </li>
+            <li class="depth1 arw_on" group-code="20" category-code="20_243">
+               <!-- 오른쪽에 화살표추가시 arw_on  추가 --><a href="http://tour.danawa.com/243"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_유럽')" class="btn_cate_02">유럽</a>
+            </li>
+            <li class="depth1 arw_on" group-code="20" category-code="20_294">
+               <!-- 오른쪽에 화살표추가시 arw_on  추가 --><a href="http://tour.danawa.com/294"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_아프리카/서남아')" class="btn_cate_02">아프리카/서남아</a>
+            </li>
+            <li class="depth1 arw_on" group-code="20" category-code="20_316">
+               <!-- 오른쪽에 화살표추가시 arw_on  추가 --><a href="http://tour.danawa.com/316"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_미주/중남미/하와이')" class="btn_cate_02">미주/중남미/하와이</a>
+            </li>
+            <li class="depth1" group-code="20" category-code="20_1085">
+               <!-- 오른쪽에 화살표추가시 arw_on  추가 --><a href="http://tour.danawa.com/curation?menuSeqs=1085"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_큐레이션')" class="btn_cate_02">큐레이션</a>
+            </li>
+         </ul>
+      </div>
+      <div id="categoryUnit20_22916" class="two_depth_over three_depth_over" style="display:none;top:126px;">
+         <h4 class="screen_out">세번째 카테고리</h4>
+         <ul class="depth1_list depth1_list2 depth1_list3">
+            <!-- 선택된 dot링크형태: active_on 클래스 추가, 글씨옆 파란색 화살표 a 태그에 : btn_cate_02 -->
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322920&15main_20_03" class="btn_cate_02">보조배터리</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322923&15main_20_03" class="btn_cate_02">블루투스스피커</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322922&15main_20_03" class="btn_cate_02">충전기</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20329578&15main_20_03" class="btn_cate_02">해외여행용 충전기</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322924&15main_20_03" class="btn_cate_02">방수카메라/액션캠</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322921&15main_20_03" class="btn_cate_02">셀카봉</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322953&15main_20_03" class="btn_cate_02">전기면도기</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322955&15main_20_03" class="btn_cate_02">드라이어</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322954&15main_20_03" class="btn_cate_02">매직/고데기</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20323100&15main_20_03" class="btn_cate_02">변압기</a></li>
+         </ul>
+      </div>
+      <div id="categoryUnit20_22925" class="two_depth_over three_depth_over" style="display:none;top:126px;">
+         <h4 class="screen_out">세번째 카테고리</h4>
+         <ul class="depth1_list depth1_list2 depth1_list3">
+            <!-- 선택된 dot링크형태: active_on 클래스 추가, 글씨옆 파란색 화살표 a 태그에 : btn_cate_02 -->
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322926&15main_20_03" class="btn_cate_02">여행용 세트</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322927&15main_20_03" class="btn_cate_02">선케어/선크림</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322968&15main_20_03" class="btn_cate_02">시트/슬리핑팩</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322964&15main_20_03" class="btn_cate_02">기내용미스트</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322965&15main_20_03" class="btn_cate_02">드라이샴푸</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322967&15main_20_03" class="btn_cate_02">클렌징티슈</a></li>
+         </ul>
+      </div>
+      <div id="categoryUnit20_22914" class="two_depth_over three_depth_over" style="display:none;top:126px;">
+         <h4 class="screen_out">세번째 카테고리</h4>
+         <ul class="depth1_list depth1_list2 depth1_list3">
+            <!-- 선택된 dot링크형태: active_on 클래스 추가, 글씨옆 파란색 화살표 a 태그에 : btn_cate_02 -->
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322934&15main_20_03" class="btn_cate_02">수영복</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322930&15main_20_03" class="btn_cate_02">래쉬가드</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322931&15main_20_03" class="btn_cate_02">보드숏/워터레깅스</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322933&15main_20_03" class="btn_cate_02">스노클링 용품</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322932&15main_20_03" class="btn_cate_02">튜브</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20325466&15main_20_03" class="btn_cate_02">수상레저</a></li>
+         </ul>
+      </div>
+      <div id="categoryUnit20_22915" class="two_depth_over three_depth_over" style="display:none;top:126px;">
+         <h4 class="screen_out">세번째 카테고리</h4>
+         <ul class="depth1_list depth1_list2 depth1_list3">
+            <!-- 선택된 dot링크형태: active_on 클래스 추가, 글씨옆 파란색 화살표 a 태그에 : btn_cate_02 -->
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322937&15main_20_03" class="btn_cate_02">캐리어세트</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322938&15main_20_03" class="btn_cate_02">하드케이스</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322939&15main_20_03" class="btn_cate_02">소프트케이스</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20329238&15main_20_03" class="btn_cate_02">여행용배낭</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322940&15main_20_03" class="btn_cate_02">보스턴백</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322941&15main_20_03" class="btn_cate_02">캐주얼백팩</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20329246&15main_20_03" class="btn_cate_02">크로스백</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322942&15main_20_03" class="btn_cate_02">여권지갑</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322944&15main_20_03" class="btn_cate_02">여행소품</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322945&15main_20_03" class="btn_cate_02">선글라스</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322946&15main_20_03" class="btn_cate_02">모자</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20329345&15main_20_03" class="btn_cate_02">샌들</a></li>
+         </ul>
+      </div>
+      <div id="categoryUnit20_22956" class="two_depth_over three_depth_over" style="display:none;top:126px;">
+         <h4 class="screen_out">세번째 카테고리</h4>
+         <ul class="depth1_list depth1_list2 depth1_list3">
+            <!-- 선택된 dot링크형태: active_on 클래스 추가, 글씨옆 파란색 화살표 a 태그에 : btn_cate_02 -->
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322960&15main_20_03" class="btn_cate_02">휴대용 유모차</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322961&15main_20_03" class="btn_cate_02">아기띠</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322962&15main_20_03" class="btn_cate_02">기저귀 가방</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322959&15main_20_03" class="btn_cate_02">물티슈</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322957&15main_20_03" class="btn_cate_02">기저귀</a></li>
+            <li class="depth1"><a href="http://prod.danawa.com/list/?cate=20322958&15main_20_03" class="btn_cate_02">분유</a></li>
+         </ul>
+      </div>
+      <div id="categoryUnit20_2" class="two_depth_over three_depth_over" style="display:none;top:126px;">
+         <h4 class="screen_out">세번째 카테고리</h4>
+         <ul class="depth1_list depth1_list2 depth1_list3">
+            <!-- 선택된 dot링크형태: active_on 클래스 추가, 글씨옆 파란색 화살표 a 태그에 : btn_cate_02 -->
+            <li class="depth1"><a href="http://tour.danawa.com/list/3"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_동남아/대만_태국')" class="btn_cate_02">태국<span class="icom ico_h">인기메뉴</span></a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/16"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_동남아/대만_필리핀')" class="btn_cate_02">필리핀</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/24"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_동남아/대만_베트남')" class="btn_cate_02">베트남</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/30"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_동남아/대만_캄보디아')" class="btn_cate_02">캄보디아</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/34"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_동남아/대만_말레이시아')" class="btn_cate_02">말레이시아</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/42"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_동남아/대만_인도네시아')" class="btn_cate_02">인도네시아</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/48"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_동남아/대만_라오스')" class="btn_cate_02">라오스</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/52"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_동남아/대만_미얀마')" class="btn_cate_02">미얀마</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/61"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_동남아/대만_대만')" class="btn_cate_02">대만</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/57"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_동남아/대만_싱가포르')" class="btn_cate_02">싱가포르</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/18030190"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_동남아/대만_브루나이')" class="btn_cate_02">브루나이</a></li>
+         </ul>
+      </div>
+      <div id="categoryUnit20_66" class="two_depth_over three_depth_over" style="display:none;top:126px;">
+         <h4 class="screen_out">세번째 카테고리</h4>
+         <ul class="depth1_list depth1_list2 depth1_list3">
+            <!-- 선택된 dot링크형태: active_on 클래스 추가, 글씨옆 파란색 화살표 a 태그에 : btn_cate_02 -->
+            <li class="depth1"><a href="http://tour.danawa.com/list/78"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_중국/홍콩_장가계')" class="btn_cate_02">장가계</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/141"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_중국/홍콩_홍콩/마카오')" class="btn_cate_02">홍콩/마카오</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/67"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_중국/홍콩_북경')" class="btn_cate_02">북경</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/73"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_중국/홍콩_상해')" class="btn_cate_02">상해</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/94"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_중국/홍콩_계림/양삭/광저우')" class="btn_cate_02">계림/양삭/광저우</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/98"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_중국/홍콩_산동성')" class="btn_cate_02">산동성</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/84"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_중국/홍콩_황산/삼청산')" class="btn_cate_02">황산/삼청산</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/135"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_중국/홍콩_서안')" class="btn_cate_02">서안</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/90"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_중국/홍콩_곤명')" class="btn_cate_02">곤명</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/115"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_중국/홍콩_백두산')" class="btn_cate_02">백두산<span class="icom ico_h">인기메뉴</span></a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/103"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_중국/홍콩_중경')" class="btn_cate_02">중경</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/109"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_중국/홍콩_태항대협곡')" class="btn_cate_02">태항대협곡</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/123"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_중국/홍콩_귀주')" class="btn_cate_02">귀주</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/127"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_중국/홍콩_성도/구채구')" class="btn_cate_02">성도/구채구</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/132"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_중국/홍콩_대련/하얼빈')" class="btn_cate_02">대련/하얼빈</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/139"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_중국/홍콩_하이난')" class="btn_cate_02">하이난</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/144"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_중국/홍콩_몽골')" class="btn_cate_02">몽골</a></li>
+         </ul>
+      </div>
+      <div id="categoryUnit20_146" class="two_depth_over three_depth_over" style="display:none;top:126px;">
+         <h4 class="screen_out">세번째 카테고리</h4>
+         <ul class="depth1_list depth1_list2 depth1_list3">
+            <!-- 선택된 dot링크형태: active_on 클래스 추가, 글씨옆 파란색 화살표 a 태그에 : btn_cate_02 -->
+            <li class="depth1"><a href="http://tour.danawa.com/list/193"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_일본_오사카')" class="btn_cate_02">오사카</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/158"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_일본_도쿄(동경)')" class="btn_cate_02">도쿄(동경)</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/166"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_일본_규슈/오키나와')" class="btn_cate_02">규슈/오키나와</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/181"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_일본_북해도(훗카이도)/동북')" class="btn_cate_02">북해도(훗카이도)/동북<span class="icom ico_h">인기메뉴</span></a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/203"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_일본_도야마/요나고/오카야마')" class="btn_cate_02">도야마/요나고/오카야마</a></li>
+         </ul>
+      </div>
+      <div id="categoryUnit20_216" class="two_depth_over three_depth_over" style="display:none;top:126px;">
+         <h4 class="screen_out">세번째 카테고리</h4>
+         <ul class="depth1_list depth1_list2 depth1_list3">
+            <!-- 선택된 dot링크형태: active_on 클래스 추가, 글씨옆 파란색 화살표 a 태그에 : btn_cate_02 -->
+            <li class="depth1"><a href="http://tour.danawa.com/list/231"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_남태평양_괌')" class="btn_cate_02">괌</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/233"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_남태평양_사이판')" class="btn_cate_02">사이판</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/217"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_남태평양_호주')" class="btn_cate_02">호주</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/227"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_남태평양_뉴질랜드')" class="btn_cate_02">뉴질랜드<span class="icom ico_h">인기메뉴</span></a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/235"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_남태평양_팔라우')" class="btn_cate_02">팔라우</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/237"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_남태평양_피지')" class="btn_cate_02">피지</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/239"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_남태평양_뉴칼레도니아')" class="btn_cate_02">뉴칼레도니아</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/241"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_남태평양_타히티')" class="btn_cate_02">타히티</a></li>
+         </ul>
+      </div>
+      <div id="categoryUnit20_243" class="two_depth_over three_depth_over" style="display:none;top:126px;">
+         <h4 class="screen_out">세번째 카테고리</h4>
+         <ul class="depth1_list depth1_list2 depth1_list3">
+            <!-- 선택된 dot링크형태: active_on 클래스 추가, 글씨옆 파란색 화살표 a 태그에 : btn_cate_02 -->
+            <li class="depth1"><a href="http://tour.danawa.com/list/244"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_유럽_서유럽')" class="btn_cate_02">서유럽<span class="icom ico_h">인기메뉴</span></a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/255"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_유럽_동유럽/발칸')" class="btn_cate_02">동유럽/발칸</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/269"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_유럽_러시아/북유럽/발틱')" class="btn_cate_02">러시아/북유럽/발틱</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/279"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_유럽_지중해')" class="btn_cate_02">지중해</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/286"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_유럽_중앙아시아/코카서스')" class="btn_cate_02">중앙아시아/코카서스</a></li>
+         </ul>
+      </div>
+      <div id="categoryUnit20_294" class="two_depth_over three_depth_over" style="display:none;top:126px;">
+         <h4 class="screen_out">세번째 카테고리</h4>
+         <ul class="depth1_list depth1_list2 depth1_list3">
+            <!-- 선택된 dot링크형태: active_on 클래스 추가, 글씨옆 파란색 화살표 a 태그에 : btn_cate_02 -->
+            <li class="depth1"><a href="http://tour.danawa.com/list/295"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_아프리카/서남아_아프리카')" class="btn_cate_02">아프리카</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/303"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_아프리카/서남아_중동')" class="btn_cate_02">중동</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/309"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_아프리카/서남아_서남아')" class="btn_cate_02">서남아</a></li>
+         </ul>
+      </div>
+      <div id="categoryUnit20_316" class="two_depth_over three_depth_over" style="display:none;top:126px;">
+         <h4 class="screen_out">세번째 카테고리</h4>
+         <ul class="depth1_list depth1_list2 depth1_list3">
+            <!-- 선택된 dot링크형태: active_on 클래스 추가, 글씨옆 파란색 화살표 a 태그에 : btn_cate_02 -->
+            <li class="depth1"><a href="http://tour.danawa.com/list/317"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_미주/중남미/하와이_미동부')" class="btn_cate_02">미동부</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/324"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_미주/중남미/하와이_미서부')" class="btn_cate_02">미서부</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/333"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_미주/중남미/하와이_미남부')" class="btn_cate_02">미남부</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/340"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_미주/중남미/하와이_하와이')" class="btn_cate_02">하와이</a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/346"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_미주/중남미/하와이_캐나다')" class="btn_cate_02">캐나다<span class="icom ico_h">인기메뉴</span></a></li>
+            <li class="depth1"><a href="http://tour.danawa.com/list/359"target="_blank" onclick="_trkEventLog('ca_여행/항공/호텔_패키지/자유여행_미주/중남미/하와이_중남미')" class="btn_cate_02">중남미</a></li>
+         </ul>
+      </div>
+      <div class="cate_right_area" id="cateRightAre_20" data-sectionName="여행/항공/호텔">
+         <div class="category_banner_area">
+            <div class="banner_01">
+               <a href="http://danawa.webtour.com/GEvent/ev_detail.asp?eIdx=4384" target="_blank" onclick="_trkEventLog('15통합메인_여행/항공/호텔_LNB우측_안동여행');">
+                  <img src="//img.danawa.com/ui_category/plan/right/right20TopNew.jpg?t=1616654639" alt="안동여행"><!-- banner img size 240 * 185 -->
+               </a>
+            </div>
+            <div class="banner_01 banner_02" id="bannerIframe_top_20" data-ad-seq="11"><iframe src="about:blank" title="섹션별 광고 영역1" width="210" height="165" frameborder="0" marginheight="0" marginwidth="0" scrolling="no" noresize></iframe></div>
+            <div class="banner_01"><a href="http://danawa.webtour.com/GEvent/ev_detail.asp?eIdx=4718" target="_blank" onclick="_trkEventLog('15통합메인_여행/항공/호텔_LNB우측_한옥스테이');"><img src="//img.danawa.com/ui_category/plan/right/right20BottomNew.jpg?t=1616654639" alt="한옥스테이" /></a></div>
+            <div class="banner_01 banner_02" id="bannerIframe_bottom_20" data-ad-seq="31"><iframe src="about:blank" title="섹션별 광고 영역2" width="210" height="165" frameborder="0" marginheight="0" marginwidth="0" scrolling="no" noresize></iframe></div>
+         </div>
+         <div class="cate_txt_list">
+            <h4 class="screen_out">다나와 기획전 목록</h4>
+            <ul class="catx_list">
+               <li class="li_cx"><a href="http://danawa.webtour.com/DMI/dm_index.asp" target="_blank" class="cxa" onclick="_trkEventLog('15통합메인_여행/항공/호텔_LNB01_최대 35% 즉시할인_기차여행만들기');">최대 35% 즉시할인_기차여행만들기</a></li>
+               <li class="li_cx"><a href="http://danawa.webtour.com/GEvent/ev_detail.asp?eIdx=1517" target="_blank" class="cxa" onclick="_trkEventLog('15통합메인_여행/항공/호텔_LNB01_알아두면 좋은_국내항공 결항 대처법');">알아두면 좋은_국내항공 결항 대처법</a></li>
+               <li class="li_cx"><a href="http://danawa.webtour.com/GEvent/ev_detail.asp?eIdx=4701" target="_blank" class="cxa" onclick="_trkEventLog('15통합메인_여행/항공/호텔_LNB01_제주여행 예약시 입장권 전원 증정');">제주여행 예약시 입장권 전원 증정</a></li>
+               <li class="li_cx"><a href="http://danawa.webtour.com/GEvent/ev_detail.asp?eIdx=4689" target="_blank" class="cxa" onclick="_trkEventLog('15통합메인_여행/항공/호텔_LNB01_나를 위한 사치_그랜드 조선 제주호텔');">나를 위한 사치_그랜드 조선 제주호텔</a></li>
+            </ul>
+         </div>
+      </div>
+   </div>
+</div>
