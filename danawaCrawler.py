@@ -39,7 +39,9 @@ def getParams(categoryLink):
 	}
 	res = requests.get(categoryLink, headers=headers)
 	soup = BeautifulSoup(res.text, "html.parser")
-	if (len(soup.findAll('script')) == 1):
+	if (len(soup.findAll('script')) < 9):
+		return
+	if (len(str(soup.findAll('script')[8]).split('var oGlobalSetting = {')) < 2):
 		return
 
 	temp = str(soup.findAll('script')[8]).split('var oGlobalSetting = {')[1].split(';')[0].split(',')
@@ -122,6 +124,10 @@ def getPcode(params):
 
 categoryList = getCategoryList()
 
+print(len(categoryList))
+
+cnt = 0
 for category in categoryList:
-	printLog(category)
+	cnt += 1
+	printLog(str(cnt) + ' ' + category)
 	getPcode(getParams(category))
