@@ -1,24 +1,60 @@
 import requests
 import json
+from concurrent.futures import ThreadPoolExecutor
 from bs4 import BeautifulSoup
 
 logfile = open('log.txt', 'a', encoding='utf8')
+cnt = 0
 
 def printLog(str) :
 	print(str, flush=True)
 	logfile.write(str + '\n')
 	return
 
-def getCategoryList() :
-	categoryList = []
-	for i in range(10, 21):
-		f = open(str(i), 'rt', encoding='utf-8')
-		fileData = f.read()
-		soup = BeautifulSoup(fileData, 'html.parser')
+# 무시할 string이 카테고리 이름에 포함되어 있는지 check
+def checkCategoryName(categoryName):
+	# 무시할 카테고리 이름
+	ignoreTitleList = ['ISSUE', 'BEST', '전체', '개학']
 
-		for ul in soup.findAll('ul', attrs= {'class': 'depth1_list depth1_list2 depth1_list3'}):
-			for a in ul.findAll('a'):
-				categoryList.append(a['href'].split('&')[0])
+	# 무시할 카테고리 이름이 포함 되어 있는지 check
+	ret = True
+	for ignoreTitle in ignoreTitleList:
+		if (ignoreTitle in categoryName):
+			ret = False
+	return ret
+
+def getCategoryList() :
+	# category 목록 request
+	res = requests.get("http://www.danawa.com/globaljs/com/danawa/common/category/CategoryInfoByDepth.js.php?depth=3&_=1625405270955", headers = {
+		"Referer" : "http://prod.danawa.com/",
+		"User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36"
+	})
+	jsonObject = json.loads(res.text)
+
+	
+	categorySet = set()
+	for category1 in jsonObject:
+		# 여행 카테고리 제외
+		if (category1 == '20'):
+			continue
+		# 2차 카테고리 크롤링
+		for category2 in jsonObject[category1]['1'][0]:
+			# 2차 카테고리 필터링
+			if (jsonObject[category1]['1'][0][category2]['url'] == '' and jsonObject[category1]['1'][0][category2]['style'] == '' and checkCategoryName(jsonObject[category1]['1'][0][category2]['name'])):
+				categorySet.add(int(category1 + '1' + str(jsonObject[category1]['1'][0][category2]['code'])))
+
+		# 3차 카테고리 크롤링
+		for category2 in range(2, 4):
+			for category3 in jsonObject[category1][str(category2)]:
+				if (int(category1 + str(category2 - 1) + category3) in categorySet):
+					categorySet.remove(int(category1 + str(category2 - 1) + category3))
+					for category4 in jsonObject[category1][str(category2)][category3]:
+						if (checkCategoryName(jsonObject[category1][str(category2)][category3][category4]['name'])):
+							categorySet.add(int(category1 + str(category2) + str(jsonObject[category1][str(category2)][category3][category4]['code'])))
+
+	categoryList = []
+	for category in categorySet:
+		categoryList.append('http://prod.danawa.com/list/?cate=' + str(category))
 
 	return categoryList
 
@@ -40,8 +76,10 @@ def getParams(categoryLink):
 	res = requests.get(categoryLink, headers=headers)
 	soup = BeautifulSoup(res.text, "html.parser")
 	if (len(soup.findAll('script')) < 9):
+		printLog('@@ ' + categoryLink)
 		return
 	if (len(str(soup.findAll('script')[8]).split('var oGlobalSetting = {')) < 2):
+		printLog('!! ' + categoryLink)
 		return
 
 	temp = str(soup.findAll('script')[8]).split('var oGlobalSetting = {')[1].split(';')[0].split(',')
@@ -88,8 +126,8 @@ def getParams(categoryLink):
 
 	return params
 
-def getPcode(params):
-    pCodeList = []
+def getLinkList(params):
+    linkList = []
     headers = {
 		"Referer" : "http://prod.danawa.com/",
 		"User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36"
@@ -108,26 +146,32 @@ def getPcode(params):
         soup = BeautifulSoup(res.text, "html.parser")
         a = soup.findAll("a", attrs = {"name":"productName"})
         for i in range(len(a)):
-            pCodeList.append({
+            linkList.append({
 				'link': a[i]['href'].split('&')[0],
 				'category': a[i]['href'].split('&')[1],
 			})
 
     with open('productData.json', 'a') as file:
-        for pCode in pCodeList:
+        for link in linkList:
             file.write('\t')
-            json.dump(pCode, file)
+            json.dump(link, file)
             file.write(',\n')
 
     logfile.flush()
     return
 
-categoryList = getCategoryList()
+def pararellExecute(f, t, categoryList):
+	for i in range(f, t):
+		printLog(str(i) + ' ' + categoryList[i])
+		getLinkList(getParams(categoryList[i]))
 
-print(len(categoryList))
+if __name__=='__main__':
+	categoryList = getCategoryList()
 
-cnt = 0
-for category in categoryList:
-	cnt += 1
-	printLog(str(cnt) + ' ' + category)
-	getPcode(getParams(category))
+	printLog('총 ' + str(len(categoryList)) + '개 입니다.')
+
+	cnt = 0
+	for categoryLink in categoryList:
+		printLog(str(cnt) + " 번째 " + categoryLink)
+		cnt += 1
+		getLinkList(getParams(categoryLink))
