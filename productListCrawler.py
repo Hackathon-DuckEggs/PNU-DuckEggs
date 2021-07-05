@@ -1,10 +1,9 @@
 import requests
 import json
-from concurrent.futures import ThreadPoolExecutor
+import time
 from bs4 import BeautifulSoup
 
 logfile = open('log.txt', 'a', encoding='utf8')
-cnt = 0
 
 def printLog(str) :
 	print(str, flush=True)
@@ -25,12 +24,18 @@ def checkCategoryName(categoryName):
 
 def getCategoryList() :
 	# category 목록 request
-	res = requests.get("http://www.danawa.com/globaljs/com/danawa/common/category/CategoryInfoByDepth.js.php?depth=3&_=1625405270955", headers = {
-		"Referer" : "http://prod.danawa.com/",
-		"User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36"
-	})
+	while(True):
+		try :
+			res = requests.get("http://www.danawa.com/globaljs/com/danawa/common/category/CategoryInfoByDepth.js.php?depth=3&_=1625405270955", headers = {
+				"Referer" : "http://prod.danawa.com/",
+				"User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36"
+			})
+		except:
+			printLog('Exception occured on getCategoryList()')
+			time.sleep(5)
+			continue
+		break
 	jsonObject = json.loads(res.text)
-
 	
 	categorySet = set()
 	for category1 in jsonObject:
@@ -69,17 +74,27 @@ def getParam(list, text) :
 	else:
 		return list[ret].split(':')[1]
 
+# categoryLink에서 post data 얻어오기
 def getParams(categoryLink): 
-	headers = {
-		"User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36"
-	}
-	res = requests.get(categoryLink, headers=headers)
+	while(True):
+		try :
+			res = requests.get(categoryLink, headers = {
+				"User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36"
+			})
+		except:
+			printLog('Exception occured on getParams('+ categoryLink + ')')
+			time.sleep(5)
+			continue
+		break
+
 	soup = BeautifulSoup(res.text, "html.parser")
+	# 성인인증 페이지
 	if (len(soup.findAll('script')) < 9):
-		printLog('@@ ' + categoryLink)
+		printLog('Need Adult Authentication')
 		return
+	# 올바르지 않은 페이지
 	if (len(str(soup.findAll('script')[8]).split('var oGlobalSetting = {')) < 2):
-		printLog('!! ' + categoryLink)
+		printLog('Incorrect Page')
 		return
 
 	temp = str(soup.findAll('script')[8]).split('var oGlobalSetting = {')[1].split(';')[0].split(',')
@@ -126,44 +141,61 @@ def getParams(categoryLink):
 
 	return params
 
-def getLinkList(params):
-    linkList = []
-    headers = {
-		"Referer" : "http://prod.danawa.com/",
-		"User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36"
-	}
+def getPcodeList(params):
+	if params is None:
+		return
+	pCodeList = []
+	# 상품 페이지 수 얻어옴
+	while(True):
+		try:
+			res = requests.post("http://prod.danawa.com/list/ajax/getProductList.ajax.php", data=params, headers = {
+				"Referer" : "http://prod.danawa.com/",
+				"User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36"
+			})
+		except:
+			printLog('Exception occured on getLinkList(' + params['categoryCode'] + ')')
+			time.sleep(5)
+			continue
+		break
 
-    res = requests.post("http://prod.danawa.com/list/ajax/getProductList.ajax.php", headers = headers, data=params)
-    soup = BeautifulSoup(res.text, "html.parser")
-    numOfProduct = int(str(soup.find('input', attrs = {'id': 'totalProductCount'})).split('\n')[0].split('value="')[1].split('"')[0].replace(',', ''))
+	soup = BeautifulSoup(res.text, "html.parser")
+	numOfProduct = int(str(soup.find('input', attrs = {'id': 'totalProductCount'})).split('\n')[0].split('value="')[1].split('"')[0].replace(',', ''))
+	numOfPage = numOfProduct // 90 + 1 + (0 if numOfProduct % 90 == 0 else 1)
+	printLog('총' + str(numOfPage) + '페이지 입니다.')
 
-    printLog('총' + str(numOfProduct // 90 + (0 if numOfProduct % 90 == 0 else 1)) + '페이지 입니다.')
-    for i in range(1, numOfProduct // 90 + 1 + (0 if numOfProduct % 90 == 0 else 1)):
-        printLog(str(i) + "페이지 입니다")
-        params['page'] = i
+	# 각 페이지마다 query를 날려 상품 list 얻어옴
+	for i in range(1, numOfPage + 1):
+		printLog(str(i) + "페이지 입니다")
+		params['page'] = i
 
-        res = requests.post("http://prod.danawa.com/list/ajax/getProductList.ajax.php", headers = headers, data=params)
-        soup = BeautifulSoup(res.text, "html.parser")
-        a = soup.findAll("a", attrs = {"name":"productName"})
-        for i in range(len(a)):
-            linkList.append({
-				'link': a[i]['href'].split('&')[0],
-				'category': a[i]['href'].split('&')[1],
+		while(True):
+			try:
+				res = requests.post("http://prod.danawa.com/list/ajax/getProductList.ajax.php", data=params,  headers = {
+					"Referer" : "http://prod.danawa.com/",
+					"User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36"
+				})
+			except:
+				printLog('Exception occured on getLinkList(' + params['categoryCode'] + ')\'s page ' + str(i))
+				time.sleep(5)
+				continue
+			break
+
+		soup = BeautifulSoup(res.text, "html.parser")
+		a = soup.findAll("a", attrs = {"name":"productName"})
+		for i in range(len(a)):
+			pCodeList.append({
+				'pCode': a[i]['href'].split('&')[0].split('=')[1],
 			})
 
-    with open('productData.json', 'a') as file:
-        for link in linkList:
-            file.write('\t')
-            json.dump(link, file)
-            file.write(',\n')
+	# 얻어온 상품들 output
+	with open('productData.json', 'a') as file:
+		for pCode in pCodeList:
+			file.write('\t')
+			json.dump(pCode, file)
+			file.write(',\n')
 
-    logfile.flush()
-    return
-
-def pararellExecute(f, t, categoryList):
-	for i in range(f, t):
-		printLog(str(i) + ' ' + categoryList[i])
-		getLinkList(getParams(categoryList[i]))
+	logfile.flush()
+	return
 
 if __name__=='__main__':
 	categoryList = getCategoryList()
@@ -174,4 +206,4 @@ if __name__=='__main__':
 	for categoryLink in categoryList:
 		printLog(str(cnt) + " 번째 " + categoryLink)
 		cnt += 1
-		getLinkList(getParams(categoryLink))
+		getPcodeList(getParams(categoryLink))
