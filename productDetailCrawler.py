@@ -13,6 +13,7 @@ requestHeader = {
 def printLog(str) :
 	print('[' + datetime.now().strftime('%y/%m/%d/%H/%M/%S') + ']' + str, flush=True)
 	logfile.write('[' + datetime.now().strftime('%y/%m/%d/%H/%M/%S') + ']' + str + '\n')
+	logfile.flush()
 	return
 
 def getProductInfo(pCode):
@@ -29,22 +30,25 @@ def getProductInfo(pCode):
 	soup = BeautifulSoup(res.text, 'html.parser')
 
 	# 상품 명
+	if (soup.find('h3', attrs= {'class': 'prod_tit'}) is None):
+		return
 	productInfo['title'] = soup.find('h3', attrs= {'class': 'prod_tit'}).text
 
 	# 카테고리
-	productInfo['categories'] = []
-	for item in soup.findAll('div', {'class': 'loca_item'}):
-		category = item.find('button').get_text()
-		if (category != '선택하세요'):
-			productInfo['categories'].append(category)
+	settingIndex = -1
+	for i, e in enumerate(soup.findAll('script')):
+		if (str(e).find('_TRK_PNG_NM') != -1):
+			settingIndex = i
+			break
 
+	productInfo['categories'] = str(soup.findAll('script')[settingIndex]).split('_TRK_PNG_NM="')[1].split('";')[0].split('^')
+
+	# post data 전처리
 	settingIndex = -1
 	for i, e in enumerate(soup.findAll('script')):
 		if (str(e).find('var oGlobalSetting = {') != -1):
 			settingIndex = i
 			break
-
-	# post data 전처리
 	temp = str(soup.findAll('script')[settingIndex]).split('var oGlobalSetting = {')[1].split(';')[0].split(',')
 	internalCategoryInfo=[]
 	for element in temp:
@@ -81,10 +85,11 @@ def getProductInfo(pCode):
 		printLog('Error on getProductInfo(' + pCode + ')')
 		return
 
+	productInfo['specs'] = {}
 	for title, description in zip(soup.findAll('th', attrs= {'class', 'tit'}), soup.findAll('td', attrs= {'class', 'dsc'})):
-		if (title.text == '' or title.text == '적합성평가인증' or title.text == '안전확인인증'):
+		if (title.text.strip() == '' or title.text.strip() == '적합성평가인증' or title.text.strip() == '안전확인인증'):
 			continue
-		productInfo['specs'] = {title.text.strip() : description.text.strip()}
+		productInfo['specs'][title.text.strip()] = description.text.strip()
 
 	return productInfo
 
@@ -109,13 +114,14 @@ def getReviewList(pCode):
 if __name__=='__main__':
 	with open('productData.json', 'r') as file:
 		productList = json.load(file)
+
 	for i, item in enumerate(productList):
 		ret = getProductInfo(str(item['pCode']))
 		if (ret is None):
 			continue
 		ret['reviewList'] = getReviewList(str(item['pCode']))
 		ret['pCode'] = item['pCode']
-		printLog(str(i) + ' 번째')
+		printLog(str(i) + ' 번째 : ' + str(item['pCode']))
 		with open('productDetailData.json', 'a', encoding='utf8') as file:
 			file.write('\t')
 			json.dump(ret, file, ensure_ascii=False)
