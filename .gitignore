@@ -1,3 +1,4 @@
 node_modules/
 backend/crawler/*.json
 backend/crawler/log.txt
+backend/package-lock.json

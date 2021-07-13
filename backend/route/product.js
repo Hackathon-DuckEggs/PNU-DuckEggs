@@ -9,15 +9,26 @@ router.get('/:pCode', (req, res) => {
 		return res.status(200).json({success: true, productInfo})
 	})
 })
-
-// 정규 표현식 사용 => 
+ 
 router.get('/', (req, res) => {
 	var queryString = req.query.title
-	if (queryString < 2)
+	let width = req.query.width ? req.query.width : 130
+	let height = req.query.height ? req.query.height : 130
+	console.log(queryString, width, height)
+	if (queryString.length < 2)
 		return res.status(201).json({success: false, err: 'Query string is too short'})
-	Product.find({$text: {$search: queryString, $caseSensitive: false}}, {title: true} , (err, list) => {
+
+	Product.find({$text: {$search: queryString, $caseSensitive: false}}, {title: true, pCode: true, _id: false} , (err, list) => {
 		if (err) return res.status(400).json({success: false, err})
-		return res.status(200).json({success: true, list})
+		result = list.map((item) => {
+			let t = {
+				pCode: item['pCode'],
+				title: item['title'],
+				image: `http://img.danawa.com/prod_img/500000/${item['pCode'].slice(item['pCode'].length - 3 , item['pCode'].length)}/${item['pCode'].slice(item['pCode'].length - 6, item['pCode'].length - 3)}/img/${item['pCode']}_1.jpg?shrink=${width}:${height}`
+			}
+			return t
+		})
+		return res.status(200).json({success: true, list: result})
 	}).limit(30)
 })
 

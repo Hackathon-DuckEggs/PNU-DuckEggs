@@ -25,7 +25,7 @@ function parseReview(code)
             
             try{
                 const $ = cheerio.load(body)
-                resolve($('#danawa-community-bbsView-board-content').text().replace(/\s+/g, ' '))
+                resolve($('#danawacommunitybbsViewboardcontent').text().replace(/\s+/g, ' '))
             }catch(e){
                 reject(e)
             }

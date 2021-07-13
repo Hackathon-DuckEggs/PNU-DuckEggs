@@ -12,8 +12,7 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.10",
     "express": "^4.17.1",
-    "request": "^2.88.2"
-    "express": "^4.17.1",
+    "request": "^2.88.2",
     "mongoose": "^5.13.2"
   }
 }
