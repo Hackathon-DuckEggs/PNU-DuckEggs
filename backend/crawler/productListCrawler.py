@@ -89,15 +89,17 @@ def getParams(categoryLink):
 
 	soup = BeautifulSoup(res.text, "html.parser")
 	# 성인인증 페이지
-	if (len(soup.findAll('script')) < 9):
+	if (len(soup.findAll('script')) < 10):
 		printLog('Need Adult Authentication')
 		return
 	# 올바르지 않은 페이지
-	if (len(str(soup.findAll('script')[8]).split('var oGlobalSetting = {')) < 2):
+
+	scriptString = str(soup.findAll('script')[9])
+	if (len(scriptString.split('var oGlobalSetting = {')) < 2):
 		printLog('Incorrect Page')
 		return
 
-	temp = str(soup.findAll('script')[8]).split('var oGlobalSetting = {')[1].split(';')[0].split(',')
+	temp = scriptString.split('var oGlobalSetting = {')[1].split(';')[0].split(',')
 	list = []
 	for i in range(len(temp)):
 		list.append(temp[i].strip())
@@ -121,7 +123,7 @@ def getParams(categoryLink):
 	params['sDiscountProductRate'] = 0
 	params['sInitialPriceDisplay'] = 'N'
 	params['sPowerLinkKeyword'] = getParam(list, 'sPowerLinkKeyword')
-	params['oCurrentCategoryCode'] = str(soup.findAll('script')[8]).split('var oCurrentCategoryCode = "')[1].split('";')[0]
+	params['oCurrentCategoryCode'] = scriptString.split('var oCurrentCategoryCode = "')[1].split('";')[0]
 	params['innerSearchKeyword'] = ''
 	params['listPackageType'] = 1
 	params['categoryMappingCode'] = getParam(list, 'sCategoryMappingCode')
