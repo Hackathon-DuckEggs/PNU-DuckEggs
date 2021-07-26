@@ -1,8 +1,11 @@
+import multiprocessing
 import requests
 import json
 import time
+import sys
 from datetime import datetime 
 from bs4 import BeautifulSoup
+from multiprocessing import Pool
 
 logfile = open('log.txt', 'a', encoding='utf8')
 requestHeader = {
@@ -11,19 +14,21 @@ requestHeader = {
 }
 
 def printLog(str) :
-	print('[' + datetime.now().strftime('%y/%m/%d/%H/%M/%S') + ']' + str, flush=True)
+	#print('[' + datetime.now().strftime('%y/%m/%d/%H/%M/%S') + ']' + str, flush=True)
 	logfile.write('[' + datetime.now().strftime('%y/%m/%d/%H/%M/%S') + ']' + str + '\n')
 	logfile.flush()
 	return
 
-def getProductInfo(pCode):
+def getProductInfo(pCode, index):
 	productInfo = {}
+	productInfo['pCode'] = pCode
+
 
 	while(True):
 		try :
 			res = requests.post('http://prod.danawa.com/info/?pcode=' + pCode, headers = requestHeader)
 		except:
-			printLog('Exception occured on getCategoryList()')
+			printLog(f'Exception occured on {index} getCategoryList() info')
 			time.sleep(5)
 			continue
 		break
@@ -63,7 +68,7 @@ def getProductInfo(pCode):
 	madeInfo['maker'] =  soup.find('div', attrs= {'class': 'made_info'}).find('span', attrs= {'id': 'makerTxtArea'}).get_text().split('\n')[1].strip()
 
 	if len(internalCategoryInfo) != 2:
-		printLog("Exception: internalCategoryInfo's length is not '2' (" + pCode + ")")
+		printLog(f"Exception: {index} internalCategoryInfo's length is not '2' (" + pCode + ")")
 
 	# 기타스펙
 	while(True):
@@ -76,7 +81,7 @@ def getProductInfo(pCode):
 				'displayMakeDate': madeInfo['date'],
 			})
 		except:
-			printLog('Exception occured on getCategoryList()')
+			printLog(f'Exception occured on {index} getCategoryList() 기타스펙')
 			time.sleep(5)
 			continue
 		break
@@ -91,15 +96,30 @@ def getProductInfo(pCode):
 			continue
 		productInfo['specs'][title.text.strip()] = description.text.strip()
 
+	# 상품의견 수
+	while(True):
+		try :
+			res = requests.get('http://prod.danawa.com/info/dpg/ajax/productOpinion.ajax.php?prodCode=' + pCode, headers = requestHeader)
+		except:
+			printLog(f'Exception occured on {index} getCategoryList() 상품의견 수')
+			time.sleep(5)
+			continue
+		break
+	soup = BeautifulSoup(res.text, 'html.parser')
+
+	productInfo['weight'] = 0
+	for e in soup.findAll('strong', attrs= {'class' : 'num_c'}):
+		productInfo['weight'] += int(e.text.replace(',', ''))
+
 	return productInfo
 
-def getReviewList(pCode):
+def getReviewList(pCode, index):
 	# review 목록 가져옴
 	while(True):
 		try :
 			res = requests.get('http://prod.danawa.com/info/dpg/ajax/community.ajax.php?prodCode=' + pCode + '&boardSeq=28%3E&page=1&limit=300', headers = requestHeader)
 		except:
-			printLog('Exception occured on getCategoryList()')
+			printLog(f'Exception occured on {index} getCategoryList()')
 			time.sleep(5)
 			continue
 		break
@@ -111,18 +131,35 @@ def getReviewList(pCode):
 
 	return reviewList
 
-if __name__=='__main__':
-	with open('productData.json', 'r') as file:
-		productList = json.load(file)
+def run(item):
+	ret = getProductInfo(str(item['pCode']), item['index'])
+	if (ret is None):
+		return
+	ret['reviewList'] = getReviewList(str(item['pCode']), str([item['index']]))
+	printLog(str(item['index']) + 'th : ' + str(item['pCode']))
+	with open('productDetailData.json', 'a', encoding='utf8') as output:
+		output.write('\t')
+		json.dump(ret, output, ensure_ascii=False)
+		output.write(',\n')
 
-	for i, item in enumerate(productList):
-		ret = getProductInfo(str(item['pCode']))
-		if (ret is None):
-			continue
-		ret['reviewList'] = getReviewList(str(item['pCode']))
-		ret['pCode'] = item['pCode']
-		printLog(str(i) + ' 번째 : ' + str(item['pCode']))
-		with open('productDetailData.json', 'a', encoding='utf8') as file:
-			file.write('\t')
-			json.dump(ret, file, ensure_ascii=False)
-			file.write(',\n')
+if __name__=='__main__':
+	pCodeList = []
+	with open('productData.json', 'r') as file:
+		cnt = 0
+		while True:
+			line = file.readline()
+			if (line == ''):
+				break
+			data = json.loads(line.strip()[:-1])
+			data['index'] = cnt
+			pCodeList.append(data)
+			cnt += 1
+
+	sTime = datetime.now()
+	print(sTime, flush=True)
+	pool = Pool(processes=10)
+	for i, _ in enumerate(pool.imap_unordered(run, pCodeList), 1):
+		sys.stderr.write('\rdone {0:%}'.format(i/cnt))
+	eTime = datetime.now()
+	print(eTime, flush=True)
+	printLog(eTime-sTime, flush=True)
