@@ -1,4 +1,3 @@
-import multiprocessing
 import requests
 import json
 import time
@@ -14,14 +13,13 @@ requestHeader = {
 }
 
 def printLog(str) :
-	#print('[' + datetime.now().strftime('%y/%m/%d/%H/%M/%S') + ']' + str, flush=True)
 	logfile.write('[' + datetime.now().strftime('%y/%m/%d/%H/%M/%S') + ']' + str + '\n')
 	logfile.flush()
 	return
 
 def getProductInfo(pCode, index):
 	productInfo = {}
-	productInfo['pCode'] = pCode
+	productInfo['pCode'] = int(pCode)
 
 
 	while(True):
@@ -127,7 +125,7 @@ def getReviewList(pCode, index):
 
 	reviewList = []
 	for item in soup.findAll('div', attrs= {'class': 'comty_newsroom_item'}):
-		reviewList.append(item.find('a')['id'].split('-')[4])
+		reviewList.append(int(item.find('a')['id'].split('-')[4]))
 
 	return reviewList
 
@@ -136,11 +134,7 @@ def run(item):
 	if (ret is None):
 		return
 	ret['reviewList'] = getReviewList(str(item['pCode']), str([item['index']]))
-	printLog(str(item['index']) + 'th : ' + str(item['pCode']))
-	with open('productDetailData.json', 'a', encoding='utf8') as output:
-		output.write('\t')
-		json.dump(ret, output, ensure_ascii=False)
-		output.write(',\n')
+	return ret
 
 if __name__=='__main__':
 	pCodeList = []
@@ -157,9 +151,18 @@ if __name__=='__main__':
 
 	sTime = datetime.now()
 	print(sTime, flush=True)
+
 	pool = Pool(processes=10)
-	for i, _ in enumerate(pool.imap_unordered(run, pCodeList), 1):
+	for i, ret in enumerate(pool.imap_unordered(run, pCodeList), 1):
 		sys.stderr.write('\rdone {0:%}'.format(i/cnt))
+		if (ret is not None):
+			printLog(str(i) + 'th : ' + str(ret['pCode']))
+			with open('productDetailData.json', 'a', encoding='utf8') as output:
+				output.write('\t')
+				json.dump(ret, output, ensure_ascii=False)
+				output.write(',\n')
+
+	
 	eTime = datetime.now()
 	print(eTime, flush=True)
 	printLog(eTime-sTime, flush=True)
