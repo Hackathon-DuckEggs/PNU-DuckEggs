@@ -32,7 +32,7 @@ function refineData(data) {
 			categoryString = e[categoryString]
 	}
 
-	ret['categories'] = categoryString
+	ret['category'] = categoryString
 
 	return ret
 }

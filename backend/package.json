@@ -10,9 +10,11 @@
   "author": "whuddn55@gmail.com\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[Dq",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.1",
     "cheerio": "^1.0.0-rc.10",
     "express": "^4.17.1",
-    "request": "^2.88.2",
-    "mongoose": "^5.13.2"
+    "line-by-line": "^0.1.6",
+    "mongoose": "^5.13.2",
+    "request": "^2.88.2"
   }
 }

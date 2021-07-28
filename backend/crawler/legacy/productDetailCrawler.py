@@ -26,7 +26,7 @@ def getProductInfo(pCode, index):
 		try :
 			res = requests.post('http://prod.danawa.com/info/?pcode=' + pCode, headers = requestHeader)
 		except:
-			printLog(f'Exception occured on {index} getCategoryList() info')
+			printLog(f'Exception occured on {pCode} getCategoryList() info')
 			time.sleep(5)
 			continue
 		break
@@ -66,7 +66,7 @@ def getProductInfo(pCode, index):
 	madeInfo['maker'] =  soup.find('div', attrs= {'class': 'made_info'}).find('span', attrs= {'id': 'makerTxtArea'}).get_text().split('\n')[1].strip()
 
 	if len(internalCategoryInfo) != 2:
-		printLog(f"Exception: {index} internalCategoryInfo's length is not '2' (" + pCode + ")")
+		printLog(f"Exception: {pCode} internalCategoryInfo's length is not '2' (" + pCode + ")")
 
 	# 기타스펙
 	while(True):
@@ -79,7 +79,7 @@ def getProductInfo(pCode, index):
 				'displayMakeDate': madeInfo['date'],
 			})
 		except:
-			printLog(f'Exception occured on {index} getCategoryList() 기타스펙')
+			printLog(f'Exception occured on {pCode} getCategoryList() 기타스펙')
 			time.sleep(5)
 			continue
 		break
@@ -99,7 +99,7 @@ def getProductInfo(pCode, index):
 		try :
 			res = requests.get('http://prod.danawa.com/info/dpg/ajax/productOpinion.ajax.php?prodCode=' + pCode, headers = requestHeader)
 		except:
-			printLog(f'Exception occured on {index} getCategoryList() 상품의견 수')
+			printLog(f'Exception occured on {pCode} getCategoryList() 상품의견 수')
 			time.sleep(5)
 			continue
 		break
@@ -117,7 +117,7 @@ def getReviewList(pCode, index):
 		try :
 			res = requests.get('http://prod.danawa.com/info/dpg/ajax/community.ajax.php?prodCode=' + pCode + '&boardSeq=28%3E&page=1&limit=300', headers = requestHeader)
 		except:
-			printLog(f'Exception occured on {index} getCategoryList()')
+			printLog(f'Exception occured on {pCode} getCategoryList()')
 			time.sleep(5)
 			continue
 		break
