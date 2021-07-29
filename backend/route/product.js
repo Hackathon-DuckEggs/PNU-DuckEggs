@@ -21,12 +21,12 @@ router.get('/:pCode', (req, res) => {
 	}
 })
  
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
 	try {
-		let title = req.query.title
-		let width = req.query.width ? req.query.width : 130
-		let height = req.query.height ? req.query.height : 130
-		let today = new Date()
+		const title = req.query.title
+		const width = req.query.width ? req.query.width : 130
+		const height = req.query.height ? req.query.height : 130
+		const today = new Date()
 		console.log(`[${today.getFullYear()}/${today.getMonth()}/${today.getDate()} ${today.getHours()}/${today.getMinutes()}/${today.getSeconds()}]${title}, ${width}, ${height}`)
 
 		if (title == null || title == '')
@@ -34,20 +34,38 @@ router.get('/', (req, res) => {
 		if (title.length < 2)
 			return res.status(200).json({success: false, err: 'Query string is too short'})
 
-		let queryString = "\"" + title.replace(/\s/g, "\" \"") + "\""
-		Product.find({$text: {$search: queryString, $caseSensitive: false}}, {title: true, pCode: true, _id: false} , (err, list) => {
+		const queryStringList = title.split(' ')
+		let minCount = Infinity
+		let minCountIndex = 0
+		for (let [index, queryString] of queryStringList.entries()) {
+			let count = await Product.countDocuments({$text: {$search: queryString}})
+			if (minCount > count) {
+				minCount = count
+				minCountIndex = index
+			}
+		}
+		console.log(minCount, queryStringList[minCountIndex])
+		
+		Product.find({'title' : {$regex: queryStringList[minCountIndex]}}, {title: true, pCode: true, _id: false, weight: true}, (err, list) => {
 			if (err) return res.status(400).json({success: false, err})
-			result = list.map((item) => {
+			let result = list.filter((item) => {
+				for (let queryString of queryStringList) {
+					if (item['title'].indexOf(queryString) == -1)
+						return false
+				}
+				return true
+			})
+			result = result.map((item) => {
 				const pCodeString = String(item['pCode'])
-				let t = {
+				return {
 					pCode: item['pCode'],
 					title: item['title'],
+					weight: item['weight'],
 					image: `http://img.danawa.com/prod_img/500000/${pCodeString.slice(pCodeString.length - 3 , pCodeString.length)}/${pCodeString.slice(pCodeString.length - 6, pCodeString.length - 3)}/img/${item['pCode']}_1.jpg?shrink=${width}:${height}`
 				}
-				return t
 			})
-			return res.status(200).json({success: true, list: result})
-		}).limit(30)
+			return res.status(200).json({success: true, list: result.slice(0, 30)})
+		}).sort({'weight' : -1})
 	} catch (err) {
 		console.log(err)
 		return res.status(400).json({success: false, err: 'Server is temporary down'})
