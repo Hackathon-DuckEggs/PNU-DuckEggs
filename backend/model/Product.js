@@ -5,9 +5,8 @@ const productSchema = mongoose.Schema( {
         type: String,
         maxLength: 150,
     },
-    categories : {
-        type: Array,
-        default: [],
+    category : {
+        type: String,
     },
     specs : {
         type: Object,
@@ -17,21 +16,12 @@ const productSchema = mongoose.Schema( {
         default: [],
     },
     pCode : {
-        type: String,
-        default: "",
+        type: Number,
     },
+	weight : {
+		type : Number,
+	}
 });
-
-/* productSchema.index({
-    title : 'text',
-    description : 'text',
-}, {
-    weight : {
-        title : 5,
-        description : 1,
-    }
-}) */
-
 
 let Product = mongoose.model('Product', productSchema);
 

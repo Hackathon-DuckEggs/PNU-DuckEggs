@@ -15,6 +15,7 @@
     "express": "^4.17.1",
     "line-by-line": "^0.1.6",
     "mongoose": "^5.13.2",
+    "node-schedule": "^2.0.0",
     "request": "^2.88.2"
   }
 }

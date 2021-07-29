@@ -8,7 +8,7 @@ router.get('/:pCode', (req, res) => {
 		console.log(`[${today.getFullYear()}/${today.getMonth()}/${today.getDate()} ${today.getHours()}/${today.getMinutes()}/${today.getSeconds()}]${req.params.pCode}`)
 		Product.findOne({'pCode': req.params.pCode}, {_id: false}, (err, productInfo) => {
 			if (err) return res.status(400).json({success: false, err})
-			if (productInfo == null) return res.status(201).json({success: false, err: 'Undefined productCode'})
+			if (productInfo == null) return res.status(200).json({success: false, err: 'Undefined productCode'})
 			specs = {}
 			for (let key in productInfo['specs'])
 				specs[key.replace(/\[dot\]/, '.')] = productInfo['specs'][key]
@@ -30,18 +30,19 @@ router.get('/', (req, res) => {
 		console.log(`[${today.getFullYear()}/${today.getMonth()}/${today.getDate()} ${today.getHours()}/${today.getMinutes()}/${today.getSeconds()}]${title}, ${width}, ${height}`)
 
 		if (title == null || title == '')
-			return res.status(201).json({success: false, err: 'Query string is empty'});
+			return res.status(200).json({success: false, err: 'Query string is empty'});
 		if (title.length < 2)
-			return res.status(201).json({success: false, err: 'Query string is too short'})
+			return res.status(200).json({success: false, err: 'Query string is too short'})
 
 		let queryString = "\"" + title.replace(/\s/g, "\" \"") + "\""
 		Product.find({$text: {$search: queryString, $caseSensitive: false}}, {title: true, pCode: true, _id: false} , (err, list) => {
 			if (err) return res.status(400).json({success: false, err})
 			result = list.map((item) => {
+				const pCodeString = String(item['pCode'])
 				let t = {
 					pCode: item['pCode'],
 					title: item['title'],
-					image: `http://img.danawa.com/prod_img/500000/${item['pCode'].slice(item['pCode'].length - 3 , item['pCode'].length)}/${item['pCode'].slice(item['pCode'].length - 6, item['pCode'].length - 3)}/img/${item['pCode']}_1.jpg?shrink=${width}:${height}`
+					image: `http://img.danawa.com/prod_img/500000/${pCodeString.slice(pCodeString.length - 3 , pCodeString.length)}/${pCodeString.slice(pCodeString.length - 6, pCodeString.length - 3)}/img/${item['pCode']}_1.jpg?shrink=${width}:${height}`
 				}
 				return t
 			})
