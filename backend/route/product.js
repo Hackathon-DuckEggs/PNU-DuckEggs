@@ -11,7 +11,7 @@ router.get('/:pCode', (req, res) => {
 			if (productInfo == null) return res.status(200).json({success: false, err: 'Undefined productCode'})
 			specs = {}
 			for (let key in productInfo['specs'])
-				specs[key.replace(/\[dot\]/, '.')] = productInfo['specs'][key]
+				specs[key.replace(/\\DOT/, '.')] = productInfo['specs'][key]
 			productInfo['specs'] = specs
 			return res.status(200).json({success: true, productInfo})
 		})

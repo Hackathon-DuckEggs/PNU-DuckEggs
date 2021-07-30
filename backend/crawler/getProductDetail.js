@@ -123,7 +123,7 @@ async function getInfo(pCode) {
 
 			let ignoreTitle = ['', '적합성평가인증', '안전확인인증', '제조회사', '등록년월']
 			for (let i = 0; i < $('th.tit').length; ++i) {
-				let title = $('th.tit').eq(i).text().trim().replace(/\./gi, '[dot]')
+				let title = $('th.tit').eq(i).text().trim().replace(/\./gi, '\\DOT')
 				if (ignoreTitle.indexOf(title) != -1)
 					continue
 

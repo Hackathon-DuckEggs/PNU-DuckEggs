@@ -21,6 +21,8 @@ const productSchema = mongoose.Schema( {
 	weight : {
 		type : Number,
 	}
+}, {
+	versionKey: false
 });
 
 let Product = mongoose.model('Product', productSchema);

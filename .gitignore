@@ -1,4 +1,6 @@
 node_modules/
-backend/crawler/*.json
+backend/crawler/**/*.json
+!backend/crawler/categoryMapping.json
 backend/crawler/log.txt
-backend/package-lock.json
+backend/test
+backend/logs
