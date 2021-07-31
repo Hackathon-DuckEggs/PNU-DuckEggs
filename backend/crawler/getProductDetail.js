@@ -1,6 +1,9 @@
 const axios = require('axios')
+axios.defaults.timeout = 1000
 const cheerio = require('cheerio')
 const fs = require('fs')
+
+const SLEEPTIME = 1000
 
 let requestConfig = {
 	headers: {
@@ -39,7 +42,7 @@ async function getReviewList(pCode) {
 		} catch(err) {
 			await printLog(`Exception raised on getReviewList(${pCode})`)
 			fs.appendFileSync('err.txt', `[${pCode}]\n${err}\n`)
-			await sleep(5000)
+			await sleep(SLEEPTIME)
 			continue
 		}
 		break
@@ -59,7 +62,7 @@ async function getNumberOfOpinion(pCode) {
 		} catch(err) {
 			await printLog(`Exception raised on getNumberOfOpinion(${pCode})`)
 			fs.appendFileSync('err.txt', `[${pCode}]\n${err}\n`)
-			await sleep(5000)
+			await sleep(SLEEPTIME)
 			continue
 		}
 		break
@@ -96,7 +99,7 @@ async function getInfo(pCode) {
 		} catch(err) {
 			printLog(`Exception raised on getInfo(${pCode}) title,category`)
 			fs.appendFileSync('err.txt', `[${pCode}]\n${err}\n`)
-			await sleep(5000)
+			await sleep(SLEEPTIME)
 			continue
 		}
 		break
@@ -135,7 +138,7 @@ async function getInfo(pCode) {
 		} catch(err) {
 			await printLog(`Exception raised on getInfo(${pCode}) specs`)
 			fs.appendFileSync('err.txt', `[${pCode}]\n${err}\n`)
-			await sleep(5000)
+			await sleep(SLEEPTIME)
 			continue
 		}
 		break
@@ -155,7 +158,6 @@ async function getProductDetail(pCode) {
 	Object.assign(productDetail, info)
 	productDetail['reviewList'] = await getReviewList(pCode)
 	productDetail['weight'] = await getNumberOfOpinion(pCode)
-	
 	
 	return productDetail
 }
