@@ -101,7 +101,7 @@ def reviewLoad(): ##수정 필요. 하나의 상품의 리뷰 묶음 리스트�
         for line in lines:
             sentenceWithKeyword(line)
 
-def load_vocabSize():
+def loadVocabSize():
     f_vocabSize = open(vocabSize_path, "r")
     vocabSize = f_vocabSize.readline()
     return vocabSize
@@ -132,17 +132,17 @@ if __name__ == "__main__":
 
     ## 입력: output file경로, 리뷰경로
     KEYWORD_CNT = 5
-    review_path = "./reviewData/reviewData_sofa.csv"
+    review_path = "./reviewData/reviewData_pc_neg.csv"
 
-    f_includeKeyword = open("./ml/includeKeyword_all_new_model_sofa.txt", "w", encoding='UTF-8')
-    f_notIncludeKeyword = open("./ml/notIncludeKeyword_all_new_model_sofa.txt", "w", encoding='UTF-8')
+    f_includeKeyword = open("./ml/includeKeyword_all_new_model_pc_neg.txt", "w", encoding='UTF-8')
+    f_notIncludeKeyword = open("./ml/notIncludeKeyword_all_new_model_pc_neg.txt", "w", encoding='UTF-8')
     ###
 
     #저장한 ML model 불러오기
     model = load_model(model_save_path)
 
     #tokenizer 불러오기
-    max_words = int(load_vocabSize())
+    max_words = int(loadVocabSize())
     tokenizer = Tokenizer(num_words=max_words)
     loadTokenizer()
 
