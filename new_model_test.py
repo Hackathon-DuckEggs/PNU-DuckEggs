@@ -7,28 +7,30 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 keywords_words = {
-    '가격': ['가격', '가성비', '비싸', '저렴', '할인', '가격대비' '가 성비'],
-    '성능' :['성능', '기능', '속도', '선명', '작동', '인식'],
+    '가격': ['가격', '가성비', '비싸', '저렴', '할인', '가격대비' '성비'],
+    '성능' :['성능', '기능', '속도', '선명', '작동', '인식', '사용법'],
     '디자인': ['디자인', '색', '컬러', '깔끔'],
-    '설치': ['설치', '거치', '고정'],
+    '설치': ['설치', '거치', '고정', '조립'],
     '화면': ['화면', '화질', '그래픽'],
     '소음': ['소음'],
     '무게': ['무게', '무거움', '가벼움', '무겁', '가볍'],
-    '포장': ['포장', '상태', '분리', '배송', '배달'],
-    '품질': ['품질', '질', '고급', '튼튼', '재질', '교환', '소재', '원단', '성분', '기능성', '발림'],
+    '포장': ['포장', '상태', '분리', '기스', '흠집', '스크레치', '얼룩', '찍힘', '검수', '박스', '완충제'],
+    '배송': ['배송', '배달', '택배', '출고', '누락'],
+    '품질': ['품질', '질', '고급', '튼튼', '재질', '소재', '원단', '성분', '기능성', '발림', '정품', '짝퉁', '불량',
+    '정확', '마감', '흔들', '벌레', '하자', '고장', ],
     '냄새': ['냄새', '공장'],
     '향' : ['향'],
     '맛': ['맛'],
     '유통기한': ['신선', '유통기한', '기간'],
     '효과': ['효능', '효과', '트러블', '톤업'],
-    '사이즈': ['사이즈', '크기', '높이'],
-    '기호': ['기호']
+    '사이즈': ['사이즈', '크기', '높이', '치수'],
+    '기호' : ['기호'],
+    '서비스': ['서비스', 'A/S', 'as', 'AS', 'As', '문의', '전화', '고객센터'],
+    '만족' : ['만족', '추천', '강추', '비추', '도움', '좋', '활용', '유용', '뿌듯', '감사', '단점',
+    '잘 ', '깨끗', '시원', '재밌', '재미', '최고', '완벽', '짱', '훌륭', '반품', '최악', '불편', '불쾌', '서비스',
+    '재구매', '다만']
     }
 keywords = keywords_words.keys()
-
-satisfaction = ['만족', '추천', '강추', '비추', '도움', '좋', '활용', '유용', '뿌듯', '감사', '단점',
-' 잘 ', '깨끗', '시원']
-
 
 def separateLine(review):
     return [sentence for sentence in kkma.sentences(review)]
@@ -78,15 +80,9 @@ def sentenceWithKeyword(line):
     keyword_flag = False
     for keyword in keywords:
         #print(keyword)
+        if keyword == '만족' and keyword_flag == True:
+            break
         for word in keywords_words[keyword]:
-            if word in line:
-                print(keyword+"###########")
-                f_includeKeyword.write(keyword + "\t")
-                predictReview(keyword, line)
-                keyword_flag = True
-                break
-    if keyword_flag == False:
-        for word in satisfaction:
             if word in line:
                 print(keyword+"###########")
                 f_includeKeyword.write(keyword + "\t")
@@ -97,9 +93,9 @@ def sentenceWithKeyword(line):
         noIncludeKeywordLine(line)
 
 def reviewLoad(): ##수정 필요. 하나의 상품의 리뷰 묶음 리스트가 review_df에 들어가면 됨
-    review_df = pd.read_csv(review_path, encoding='cp949') #지금은 파일에서 읽어오는걸로 함 , encoding='cp949' encoding='UTF-8'
+    review_df = pd.read_csv(review_path, encoding='cp949') #지금은 파일에서 읽어오는걸로 함 , encoding='cp949' encoding='UTF-8' encoding='UTF-16'
     print(review_df.values)
-    for row in review_df.values[:100]: #수정 필요. 현재 테스트를 위해 100개까지 하는걸로 함
+    for row in review_df.values[:200]: #수정 필요. 현재 테스트를 위해 200개까지 하는걸로 함
         review = row[1]
         lines = separateLine(review)
         for line in lines:
@@ -136,10 +132,10 @@ if __name__ == "__main__":
 
     ## 입력: output file경로, 리뷰경로
     KEYWORD_CNT = 5
-    review_path = "./reviewData/reviewData_game.csv"
+    review_path = "./reviewData/reviewData_sofa.csv"
 
-    f_includeKeyword = open("./ml/includeKeyword_all_new_model_game.txt", "w", encoding='UTF-8')
-    f_notIncludeKeyword = open("./ml/notIncludeKeyword_all_new_model_game.txt", "w", encoding='UTF-8')
+    f_includeKeyword = open("./ml/includeKeyword_all_new_model_sofa.txt", "w", encoding='UTF-8')
+    f_notIncludeKeyword = open("./ml/notIncludeKeyword_all_new_model_sofa.txt", "w", encoding='UTF-8')
     ###
 
     #저장한 ML model 불러오기
