@@ -97,9 +97,9 @@ def sentenceWithKeyword(line):
         noIncludeKeywordLine(line)
 
 def reviewLoad(): ##수정 필요. 하나의 상품의 리뷰 묶음 리스트가 review_df에 들어가면 됨
-    review_df = pd.read_csv(review_path, encoding='UTF-8') #지금은 파일에서 읽어오는걸로 함 , encoding='cp949'
+    review_df = pd.read_csv(review_path, encoding='cp949') #지금은 파일에서 읽어오는걸로 함 , encoding='cp949' encoding='UTF-8'
     print(review_df.values)
-    for row in review_df.values:
+    for row in review_df.values[:100]: #수정 필요. 현재 테스트를 위해 100개까지 하는걸로 함
         review = row[1]
         lines = separateLine(review)
         for line in lines:
@@ -118,11 +118,12 @@ def mostFreqKeyword5():
     sortedCnt = sorted(keywords_cnt.items(), reverse=True, key=lambda item:(item[1]['positive'] + item[1]['negative']))
     print(sortedCnt)
     i = 0
-    for keyword in sortedCnt.keys():
-        print(keyword, end="\t")
-        print(sortedCnt[keyword])
+    for keyword in sortedCnt:
+        print(keyword[0], end="\t")
+        print("긍정 리뷰 수: ", keyword[1]['positive'], end="\t")
+        print("부정 리뷰 수: ", keyword[1]['negative'])
         i += 1
-        if i >= 5:
+        if i >= KEYWORD_CNT:
             break
 
 
@@ -134,10 +135,11 @@ if __name__ == "__main__":
     vocabSize_path = "./ml/vocabSize_all_new_model.txt"
 
     ## 입력: output file경로, 리뷰경로
-    review_path = "./reviewData/complete/reviewData_dog.csv"
+    KEYWORD_CNT = 5
+    review_path = "./reviewData/reviewData_game.csv"
 
-    f_includeKeyword = open("./ml/includeKeyword_all_new_model_dog.txt", "w", encoding='UTF-8')
-    f_notIncludeKeyword = open("./ml/notIncludeKeyword_all_new_model_dog.txt", "w", encoding='UTF-8')
+    f_includeKeyword = open("./ml/includeKeyword_all_new_model_game.txt", "w", encoding='UTF-8')
+    f_notIncludeKeyword = open("./ml/notIncludeKeyword_all_new_model_game.txt", "w", encoding='UTF-8')
     ###
 
     #저장한 ML model 불러오기
