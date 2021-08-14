@@ -20,7 +20,10 @@ const productSchema = mongoose.Schema( {
     },
 	weight : {
 		type : Number,
-	}
+	},
+    view : {
+        type: Number,
+    }
 }, {
 	versionKey: false
 });

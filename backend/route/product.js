@@ -14,6 +14,16 @@ router.get('/:pCode', (req, res) => {
 		Product.findOne({'pCode': req.params.pCode}, {_id: false, reviewList: false, weight: false}, (err, productInfo) => {
 			if (err) return res.status(400).json({success: false, err})
 			if (productInfo == null) return res.status(200).json({success: false, err: 'Undefined productCode'})
+
+			Product.updateOne({'pCode': req.params.pCode}, {
+				$inc: {
+					view: 1
+				}
+			}, {}, err=>{
+				if(err){
+					console.log('Error is thrown while updating view count\n', err)
+				}
+			})
 			let specs = {}
 			for (let key in productInfo['specs'])
 				specs[key.replace(/\\DOT/, '.')] = productInfo['specs'][key]
