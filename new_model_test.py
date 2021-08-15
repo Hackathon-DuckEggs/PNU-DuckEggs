@@ -92,11 +92,11 @@ def sentenceWithKeyword(line):
     if keyword_flag == False:
         noIncludeKeywordLine(line)
 
-def reviewLoad(): ##review = 하나의 리뷰가 들어가면 됨
-    review = ""
-    lines = separateLine(review)
-    for line in lines:
-        sentenceWithKeyword(line)
+def reviewLoad(reviews):
+    for review in reviews:
+        lines = separateLine(review)
+        for line in lines:
+            sentenceWithKeyword(line)
 
 def loadVocabSize():
     f_vocabSize = open(vocabSize_path, "r")
@@ -146,7 +146,8 @@ if __name__ == "__main__":
     initCnt()
     print(keywords_cnt)
 
-    reviewLoad()
+    reviews = [] ##리뷰 리스트 넣으시면 됩니다
+    reviewLoad(reviews)
     f_includeKeyword.close()
     f_notIncludeKeyword.close()
     mostFreqKeyword5()
