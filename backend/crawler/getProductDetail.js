@@ -77,7 +77,7 @@ async function getInfo(pCode) {
 		try {
 			res = await axios.post('http://prod.danawa.com/info/?pcode=' + String(pCode), null, requestConfig)
 			const $ = cheerio.load(res.data)
-			ret['title'] = $('h3.prod_tit').text()
+			ret['title'] = $('h3.prod_tit').text().replace(/\t/g, ' ').replace(/\s{2,}/g, ' ').replace(/\x1d/g, '').replace(/\\/g, '').trim()
 			if (ret['title'] == '')
 				return
 

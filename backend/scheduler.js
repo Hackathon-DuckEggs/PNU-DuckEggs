@@ -1,6 +1,7 @@
 const schedule = require('node-schedule')
 const { Product } = require('./model/Product')
-const {getProductDetail} = require('./crawler/getProductDetail')
+const { getProductDetail } = require('./getProductDetail')
+const { uploadToES } = require('./uploadToES')
 
 async function getMaxProductCode() {
 	try {
@@ -16,6 +17,7 @@ async function getNewProducts() {
 	const maxProductCode = await getMaxProductCode()
 	const newProductCodeList = Array.from({length: 999}, (v, i) => i + 1 + Number(maxProductCode))
 
+	let successProductList = []
 	for (let [i, newProductCode] of newProductCodeList.entries()) {
 		let newProduct = await getProductDetail(newProductCode)
 		if (newProduct !== undefined) {
@@ -23,11 +25,13 @@ async function getNewProducts() {
 			try {
 				await product.save()
 				console.log(`[${i}]${newProductCode}`)
+				successProductList.push(newProduct)
 			} catch (err) {
 				console.log(err)
 			}
 		}
 	}
+	await uploadToES(successProductList)
 	console.log("get New Product end")
 }
 
