@@ -92,14 +92,11 @@ def sentenceWithKeyword(line):
     if keyword_flag == False:
         noIncludeKeywordLine(line)
 
-def reviewLoad(): ##수정 필요. 하나의 상품의 리뷰 묶음 리스트가 review_df에 들어가면 됨
-    review_df = pd.read_csv(review_path, encoding='cp949') #지금은 파일에서 읽어오는걸로 함 , encoding='cp949' encoding='UTF-8' encoding='UTF-16'
-    print(review_df.values)
-    for row in review_df.values[:200]: #수정 필요. 현재 테스트를 위해 200개까지 하는걸로 함
-        review = row[1]
-        lines = separateLine(review)
-        for line in lines:
-            sentenceWithKeyword(line)
+def reviewLoad(): ##review = 하나의 리뷰가 들어가면 됨
+    review = ""
+    lines = separateLine(review)
+    for line in lines:
+        sentenceWithKeyword(line)
 
 def loadVocabSize():
     f_vocabSize = open(vocabSize_path, "r")
@@ -130,9 +127,8 @@ if __name__ == "__main__":
     tokenizer_path = "./ml/tokenizer_all_new_model.json"
     vocabSize_path = "./ml/vocabSize_all_new_model.txt"
 
-    ## 입력: output file경로, 리뷰경로
+    ## 입력: output file경로
     KEYWORD_CNT = 5
-    review_path = "./reviewData/reviewData_pc_neg.csv"
 
     f_includeKeyword = open("./ml/includeKeyword_all_new_model_pc_neg.txt", "w", encoding='UTF-8')
     f_notIncludeKeyword = open("./ml/notIncludeKeyword_all_new_model_pc_neg.txt", "w", encoding='UTF-8')
