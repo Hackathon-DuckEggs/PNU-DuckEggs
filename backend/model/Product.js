@@ -21,9 +21,17 @@ const productSchema = mongoose.Schema( {
 	weight : {
 		type : Number,
 	},
+	reviewCnt: {
+		type: Number,
+	},
     view : {
         type: Number,
-    }
+		default: 0,
+    },
+	analyzed : {
+		type: Number,
+		default: 0,
+	}
 }, {
 	versionKey: false
 });

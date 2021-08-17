@@ -1,6 +1,6 @@
 const schedule = require('node-schedule')
 const { Product } = require('./model/Product')
-const { getProductDetail } = require('./getProductDetail')
+const { getProductDetail } = require('./crawler/getProductDetail')
 const { uploadToES } = require('./uploadToES')
 
 async function getMaxProductCode() {

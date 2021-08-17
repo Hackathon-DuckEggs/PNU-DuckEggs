@@ -21,7 +21,22 @@ function getMallReview(pCode, page = 1, review_per_page = 100)
             
             try{
                 const $ = cheerio.load(body)
-                resolve(Array.from($('.atc')).map(v=>$(v).text()))
+				let ret = Array.from($('.top_info')).map((v) => {
+					return {
+						'pCode': pCode,
+						'date': $('.date', v).text(),
+						'src': $('.mall', v).text(),
+						'name': $('.name', v).text(),
+					};
+				})
+				const contents = Array.from($('.atc')).map(v => $(v).text())
+				for (let i = 0; i < ret.length; ++i)
+					ret[i]['content'] = contents[i];
+				/* resolve(ret.map((element) => {
+					if (element['content'].length >= 30)
+						return element
+				})) */
+				resolve(ret)
             }catch(e){
                 reject(e)
             }
@@ -44,7 +59,8 @@ function getMallReviewCount(pCode)
             
             try{
                 const $ = cheerio.load(body)
-                resolve(parseInt($($('.num_c')[1]).text().replace(/\,/g, '')))
+				const cnt = parseInt($($('.num_c')[1]).text().replace(/\,/g, ''))
+                resolve(Number.isNaN(cnt) ? 0 : cnt)
             }catch(e){
                 reject(e)
             }
@@ -52,7 +68,15 @@ function getMallReviewCount(pCode)
     })
 }
 
+async function getAllMallReview(pCode) {
+	const totalCnt = await getMallReviewCount(pCode)
+	let ret = []
+	for (let i = 0; i < Math.min(10, totalCnt / 100 + (totalCnt % 100 ? 1 : 0)); ++i)
+		ret = ret.concat(await getMallReview(pCode, i + 1, 100))
+	return ret
+}
+
 module.exports = {
-    getMallReview,
-    getMallReviewCount,
+    getAllMallReview,
+	getMallReviewCount
 }

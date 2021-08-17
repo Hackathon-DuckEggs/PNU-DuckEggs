@@ -2,6 +2,7 @@ const axios = require('axios')
 axios.defaults.timeout = 1000
 const cheerio = require('cheerio')
 const fs = require('fs')
+const {getMallReviewCount} = require('./getMallReview')
 
 const SLEEPTIME = 1000
 
@@ -149,7 +150,8 @@ async function getInfo(pCode) {
 
 async function getProductDetail(pCode) {
 	let productDetail = {
-		'pCode': pCode
+		'pCode': pCode,
+		'analyzed' : 0
 	}
 
 	let info = await getInfo(pCode)
@@ -158,6 +160,7 @@ async function getProductDetail(pCode) {
 	Object.assign(productDetail, info)
 	productDetail['reviewList'] = await getReviewList(pCode)
 	productDetail['weight'] = await getNumberOfOpinion(pCode)
+	productDetail['reviewCnt'] = await getMallReviewCount(pCode)
 	
 	return productDetail
 }
