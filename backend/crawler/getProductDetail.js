@@ -31,7 +31,7 @@ async function readCategoryMappingData() {
 	let data = await fs.readFileSync(__dirname + '\\categoryMapping.json', 'utf8')
 	return JSON.parse(data)
 }
-async function getReviewList(pCode) {
+/* async function getReviewList(pCode) {
 	let reviewList = []
 	while(true) {
 		try {
@@ -49,7 +49,7 @@ async function getReviewList(pCode) {
 		break
 	}
 	return reviewList
-}
+} */
 
 async function getNumberOfOpinion(pCode) {
 	let numberOfOpinion = 0
@@ -158,7 +158,7 @@ async function getProductDetail(pCode) {
 	if (info === undefined)
 		return
 	Object.assign(productDetail, info)
-	productDetail['reviewList'] = await getReviewList(pCode)
+	// productDetail['reviewList'] = await getReviewList(pCode)
 	productDetail['weight'] = await getNumberOfOpinion(pCode)
 	productDetail['reviewCnt'] = await getMallReviewCount(pCode)
 	

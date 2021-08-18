@@ -71,7 +71,7 @@ function getMallReviewCount(pCode)
 async function getAllMallReview(pCode) {
 	const totalCnt = await getMallReviewCount(pCode)
 	let ret = []
-	for (let i = 0; i < Math.min(10, totalCnt / 100 + (totalCnt % 100 ? 1 : 0)); ++i)
+	for (let i = 0; i < Math.min(3, totalCnt / 100 + (totalCnt % 100 ? 1 : 0)); ++i)
 		ret = ret.concat(await getMallReview(pCode, i + 1, 100))
 	return ret
 }

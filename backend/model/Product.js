@@ -11,10 +11,6 @@ const productSchema = mongoose.Schema( {
     specs : {
         type: Object,
     },
-    reviewList: {
-        type: Array,
-        default: [],
-    },
     pCode : {
         type: Number,
     },
@@ -31,6 +27,9 @@ const productSchema = mongoose.Schema( {
 	analyzed : {
 		type: Number,
 		default: 0,
+	},
+	rates: {
+		type: Object
 	}
 }, {
 	versionKey: false
