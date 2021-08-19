@@ -29,10 +29,9 @@ const Title = styled.h3`
   display: flex;
 `;
 
-
 export function Product(props) {
   const { previewSrc, title } = props;
-
+  
   return (
     <ProductContainer>
       <Preview>
