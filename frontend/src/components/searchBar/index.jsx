@@ -173,8 +173,7 @@ export function SearchBar(props) {
 
     if (response) {
       console.log("Response: ", response.data);
-      if (response.data && response.data.length === 0) setNoProduct(true);
-
+      if (response.data && response.data['list'].length === 0) setNoProduct(true);
       setProduct(response.data);
     }
 
@@ -231,7 +230,7 @@ export function SearchBar(props) {
           )}
           {!isLoading && noProducts && (
             <LoadingWrapper>
-              <WarningMessage>결과를 찾을 수 없습니다!</WarningMessage>
+              <WarningMessage>제품을 찾을 수 없습니다!</WarningMessage>
             </LoadingWrapper>
           )}
           {!isLoading && !isEmpty && (
