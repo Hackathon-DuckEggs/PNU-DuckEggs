@@ -16,9 +16,10 @@ const SearchBarContainer = styled(motion.div)`
   flex-direction: column;
   width: 34em;
   height: 3.8em;
-  background-color: #fff;
+  background-color: #ff;
+  border: thick solid;
   border-radius: 6px;
-  box-shadow: 0px 2px 12px 3px rgba(0, 0, 0, 0.14);
+  border-color: #FFAA4C;
 `;
 
 const SearchInputContainer = styled.div`
@@ -36,7 +37,7 @@ const SearchInput = styled.input`
   outline: none;
   border: none;
   font-size: 21px;
-  color: #12112e;
+  color: #035397;
   font-weight: 500;
   border-radius: 6px;
   background-color: transparent;
@@ -55,22 +56,22 @@ const SearchInput = styled.input`
 `;
 
 const SearchIcon = styled.span`
-  color: #bebebe;
+  color: #FFAA4C;
   font-size: 27px;
   margin-right: 10px;
-  margin-top: 6px;
+  margin-top: 0px;
   vertical-align: middle;
 `;
 
 const CloseIcon = styled(motion.span)`
-  color: #bebebe;
+  color: #FFAA4C;
   font-size: 23px;
   vertical-align: middle;
   transition: all 200ms ease-in-out;
   cursor: pointer;
 
   &:hover {
-    color: #dfdfdf;
+    color: #035397;
   }
 `;
 
@@ -78,7 +79,8 @@ const LineSeperator = styled.span`
   display: flex;
   min-width: 100%;
   min-height: 2px;
-  background-color: #d8d8d878;
+  background-color: #FFAA4C;
+  opacity:0.2;
 `;
 
 const SearchContent = styled.div`
@@ -224,12 +226,12 @@ export function SearchBar(props) {
           )}
           {!isLoading && isEmpty && !noProducts && (
             <LoadingWrapper>
-              <WarningMessage>Start typing to Search</WarningMessage>
+              <WarningMessage>제품 이름을 입력해 주세요.</WarningMessage>
             </LoadingWrapper>
           )}
           {!isLoading && noProducts && (
             <LoadingWrapper>
-              <WarningMessage>No Product found!</WarningMessage>
+              <WarningMessage>결과를 찾을 수 없습니다!</WarningMessage>
             </LoadingWrapper>
           )}
           {!isLoading && !isEmpty && (

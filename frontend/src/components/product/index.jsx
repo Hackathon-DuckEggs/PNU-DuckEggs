@@ -5,7 +5,7 @@ const ProductContainer = styled.div`
   width: 100%;
   min-height: 6em;
   display: flex;
-  border-bottom: 2px solid #d8d8d852;
+  border-bottom: 2px solid rgba(255, 170, 76, 0.2);
   padding: 6px 8px;
   align-items: center;
 `;
