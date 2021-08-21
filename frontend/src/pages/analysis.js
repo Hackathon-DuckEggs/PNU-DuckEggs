@@ -1,12 +1,22 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { ProductDetail } from "../components/productDetail";
 
-const Analysis = () => {
-  return (
+const Analysis = (props) => {
+    // console.log(props.location.state);
+    const history = useHistory();
+    const pCode = props.location.state;
+
+    const movePath = path => {
+        history.push(path);
+      };
+
+    return (
     <div>
-      <h1>분석페이지</h1>
-      <p>분석된 부분이 보입니다.</p>
+        <ProductDetail pCode={pCode}></ProductDetail>
+        <button onClick={() => movePath('/')}>홈으로 가기</button>
     </div>
-  );
-};
+    );
+    };
 
 export default Analysis;

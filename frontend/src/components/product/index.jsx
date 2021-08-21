@@ -1,6 +1,8 @@
 import React from "react";
 import { useHistory } from 'react-router-dom';
 import styled from "styled-components";
+import { ProductDetail } from "../productDetail";
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 
 const ProductContainer = styled.div`
   width: 100%;
@@ -35,8 +37,16 @@ const Title = styled.h3`
   display: flex;
 `;
 
+// pCode 확인용
+const Pcode = styled.span`
+  color: #a1a1a1;
+  font-size: 16px;
+  display: flex;
+  flex: 0.2;
+`;
+
 export function Product(props) {
-  const { previewSrc, title } = props;
+  const {previewSrc, title, pCode} = props;
   const history = useHistory();
 
   const movePath = path => {
@@ -44,11 +54,20 @@ export function Product(props) {
   };
 
   return (
-        <ProductContainer onClick={() => movePath('/analysis')}>
+    <Link to={{
+      pathname: `/analysis/${pCode}`,
+      state: {
+        pCode: pCode,
+      }
+    }}>
+        <ProductContainer>
           <Preview>
             <img src={previewSrc} />
           </Preview>
           <Title>{title}</Title>
+          <Pcode>{pCode}</Pcode>
         </ProductContainer>
+    </Link>
   );
+  
 }

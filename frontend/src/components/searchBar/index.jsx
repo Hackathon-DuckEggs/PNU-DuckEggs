@@ -238,8 +238,9 @@ export function SearchBar(props) {
               {products.list.map(item => (
                 <Product
                   key={item.pCode}
-                  previewSrc={item.image}
                   title={item.title}
+                  previewSrc={item.image}
+                  pCode={item.pCode}
                 />
               ))} 
             </>
