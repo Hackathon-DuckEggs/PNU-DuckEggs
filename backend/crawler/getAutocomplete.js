@@ -18,7 +18,7 @@ async function getAutocomplete(queryString) {
 		"Connection" : "keep-alive"
 	}
 	try {
-		const res = await axios.post('http://search.danawa.com/ajax/getProductList.ajax.php', params, {headers})
+		const res = await axios.post('http://search.danawa.com/ajax/getProductList.ajax.php', params, {headers, timeout: 0})
 		const $ = cheerio.load(res.data)
 		
 		let result = []
@@ -30,7 +30,7 @@ async function getAutocomplete(queryString) {
 		
 		return result
 	} catch (err) {
-		return err
+		throw(err)
 	}
 }
 

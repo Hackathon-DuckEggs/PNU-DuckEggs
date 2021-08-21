@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const {runScheduler} = require('./scheduler')
 
 async function connectToDB() {
-	const {mongoURI} = require('./config/key');
+	const {mongoURI} = require('./config/key')
 	return new Promise((resolve, reject) => {
 		mongoose.connect(mongoURI, {
 			useNewUrlParser : true,
@@ -34,13 +34,14 @@ async function startApp() {
 		next()
 	})
 
-	app.use('/api/product', require('./route/product'));
+	app.use('/api/product', require('./route/product'))
+	app.use('/api/review', require('./route/review'))
 	app.get('/', (req, res) => {
 		res.send('On')
 	})
 
 	const port = process.env.PORT || 5000
-	app.listen(port, () => console.log(`App started on port ${port}`));
+	app.listen(port, () => console.log(`App started on port ${port}`))
 }
 
 startApp()
