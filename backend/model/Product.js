@@ -11,16 +11,28 @@ const productSchema = mongoose.Schema( {
     specs : {
         type: Object,
     },
-    reviewList: {
-        type: Array,
-        default: [],
-    },
     pCode : {
         type: Number,
     },
 	weight : {
 		type : Number,
+	},
+	reviewCnt: {
+		type: Number,
+	},
+    view : {
+        type: Number,
+		default: 0,
+    },
+	analyzed : {
+		type: Number,
+		default: 0,
+	},
+	rates: {
+		type: Object
 	}
+}, {
+	versionKey: false
 });
 
 let Product = mongoose.model('Product', productSchema);

@@ -12,7 +12,6 @@ async function readCategoryMapping() {
 function refineData(data) {
 	let ret = {}
 	ret['title'] = data['title']
-	ret['reviewList'] = data['reviewList']
 	ret['pCode'] = Number(data['pCode'])
 
 	ret['specs'] = {}

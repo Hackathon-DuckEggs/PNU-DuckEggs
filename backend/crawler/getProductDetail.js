@@ -1,6 +1,10 @@
 const axios = require('axios')
+axios.defaults.timeout = 1000
 const cheerio = require('cheerio')
 const fs = require('fs')
+const {getMallReviewCount} = require('./getMallReview')
+
+const SLEEPTIME = 1000
 
 let requestConfig = {
 	headers: {
@@ -27,7 +31,7 @@ async function readCategoryMappingData() {
 	let data = await fs.readFileSync(__dirname + '\\categoryMapping.json', 'utf8')
 	return JSON.parse(data)
 }
-async function getReviewList(pCode) {
+/* async function getReviewList(pCode) {
 	let reviewList = []
 	while(true) {
 		try {
@@ -39,13 +43,13 @@ async function getReviewList(pCode) {
 		} catch(err) {
 			await printLog(`Exception raised on getReviewList(${pCode})`)
 			fs.appendFileSync('err.txt', `[${pCode}]\n${err}\n`)
-			await sleep(5000)
+			await sleep(SLEEPTIME)
 			continue
 		}
 		break
 	}
 	return reviewList
-}
+} */
 
 async function getNumberOfOpinion(pCode) {
 	let numberOfOpinion = 0
@@ -59,7 +63,7 @@ async function getNumberOfOpinion(pCode) {
 		} catch(err) {
 			await printLog(`Exception raised on getNumberOfOpinion(${pCode})`)
 			fs.appendFileSync('err.txt', `[${pCode}]\n${err}\n`)
-			await sleep(5000)
+			await sleep(SLEEPTIME)
 			continue
 		}
 		break
@@ -74,7 +78,7 @@ async function getInfo(pCode) {
 		try {
 			res = await axios.post('http://prod.danawa.com/info/?pcode=' + String(pCode), null, requestConfig)
 			const $ = cheerio.load(res.data)
-			ret['title'] = $('h3.prod_tit').text()
+			ret['title'] = $('h3.prod_tit').text().replace(/\t/g, ' ').replace(/\s{2,}/g, ' ').replace(/\x1d/g, '').replace(/\\/g, '').trim()
 			if (ret['title'] == '')
 				return
 
@@ -96,7 +100,7 @@ async function getInfo(pCode) {
 		} catch(err) {
 			printLog(`Exception raised on getInfo(${pCode}) title,category`)
 			fs.appendFileSync('err.txt', `[${pCode}]\n${err}\n`)
-			await sleep(5000)
+			await sleep(SLEEPTIME)
 			continue
 		}
 		break
@@ -123,7 +127,7 @@ async function getInfo(pCode) {
 
 			let ignoreTitle = ['', '적합성평가인증', '안전확인인증', '제조회사', '등록년월']
 			for (let i = 0; i < $('th.tit').length; ++i) {
-				let title = $('th.tit').eq(i).text().trim().replace(/\./gi, '[dot]')
+				let title = $('th.tit').eq(i).text().trim().replace(/\./gi, '\\DOT')
 				if (ignoreTitle.indexOf(title) != -1)
 					continue
 
@@ -135,7 +139,7 @@ async function getInfo(pCode) {
 		} catch(err) {
 			await printLog(`Exception raised on getInfo(${pCode}) specs`)
 			fs.appendFileSync('err.txt', `[${pCode}]\n${err}\n`)
-			await sleep(5000)
+			await sleep(SLEEPTIME)
 			continue
 		}
 		break
@@ -146,16 +150,17 @@ async function getInfo(pCode) {
 
 async function getProductDetail(pCode) {
 	let productDetail = {
-		'pCode': pCode
+		'pCode': pCode,
+		'analyzed' : 0
 	}
 
 	let info = await getInfo(pCode)
 	if (info === undefined)
 		return
 	Object.assign(productDetail, info)
-	productDetail['reviewList'] = await getReviewList(pCode)
+	// productDetail['reviewList'] = await getReviewList(pCode)
 	productDetail['weight'] = await getNumberOfOpinion(pCode)
-	
+	productDetail['reviewCnt'] = await getMallReviewCount(pCode)
 	
 	return productDetail
 }
