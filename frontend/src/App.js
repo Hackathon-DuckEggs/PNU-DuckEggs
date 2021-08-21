@@ -1,21 +1,15 @@
-import styled from "styled-components";
-import "./App.css";
-import { SearchBar } from "./components/searchBar";
+import React from 'react';
+import { Route } from 'react-router-dom';
+import Analysis from './pages/analysis';
+import Home from './pages/home';
 
-const AppContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 8em;
-`;
-
-function App() {
+const App = () => {
   return (
-    <AppContainer>
-      <SearchBar />
-    </AppContainer>
+    <div>
+      <Route path="/" exact={true} component={Home} />
+      <Route path="/analysis" component={Analysis} />
+    </div>
   );
-}
+};
 
 export default App;

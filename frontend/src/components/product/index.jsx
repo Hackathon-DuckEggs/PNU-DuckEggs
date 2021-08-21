@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from 'react-router-dom';
 import styled from "styled-components";
 
 const ProductContainer = styled.div`
@@ -8,6 +9,11 @@ const ProductContainer = styled.div`
   border-bottom: 2px solid rgba(255, 170, 76, 0.2);
   padding: 6px 8px;
   align-items: center;
+
+  &:hover {
+    background-color: #EEEEEE;
+    cursor: pointer;
+  }
 `;
 
 const Preview = styled.div`
@@ -31,13 +37,18 @@ const Title = styled.h3`
 
 export function Product(props) {
   const { previewSrc, title } = props;
-  
+  const history = useHistory();
+
+  const movePath = path => {
+    history.push(path);
+  };
+
   return (
-    <ProductContainer>
-      <Preview>
-        <img src={previewSrc} />
-      </Preview>
-      <Title>{title}</Title>
-    </ProductContainer>
+        <ProductContainer onClick={() => movePath('/analysis')}>
+          <Preview>
+            <img src={previewSrc} />
+          </Preview>
+          <Title>{title}</Title>
+        </ProductContainer>
   );
 }
