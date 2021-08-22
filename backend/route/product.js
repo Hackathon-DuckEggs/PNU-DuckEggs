@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const { Product } = require('../model/Product')
 const { Review } = require('../model/Review')
-const { getAutocomplete } = require('../crawler/getAutocomplete')
+const { getAutocomplete } = require('../autocomplete')
 const { getAllMallReview } = require('../crawler/getMallReview')
 const fs = require('fs')
 

@@ -4,7 +4,7 @@ async function uploadToES(productList) {
 	let queryBody = ''
 	for (let product of productList) {
 		queryBody += `{ "index":{ "_index" : "auto_complete", "_type" : "_doc", "_id" : ${product.pCode} } }\n`
-		queryBody += `{ "title": "${product.title.replace(/\"/g, '\\"')}"}\n`
+		queryBody += `{ "title": "${product.title.replace(/\"/g, '\\"').replace(/(\s*)/g,'').toUpperCase()}", "reviewCnt": ${product.reviewCnt}}\n`
 	}
 	const bulkRes = await axios.put('http://localhost:55555/_bulk?pretty', queryBody, { headers: {'Content-Type': 'application/json'} })
 	if (bulkRes.data.errors == true) 
