@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
-const { Product } = require('../model/Product')
+const { Product } = require('./model/Product')
 const axios = require('axios')
-const {uploadToES} = reqire('./uploadToES')
+const {uploadToES} = require('./uploadToES')
 
 const BULK_SIZE = 1000
 
@@ -21,7 +21,7 @@ async function waitThrottle(cnt) {
 }
 
 async function connectToDB() {
-	const {mongoURI} = require('../config/key');
+	const {mongoURI} = require('./config/key');
 	return new Promise((resolve, reject) => {
 		mongoose.connect(mongoURI, {
 			useNewUrlParser : true,
@@ -37,7 +37,7 @@ async function connectToDB() {
 }
 
 async function getProduct(skipCount) {
-	return await Product.find({}, {_id: false, title: true, pCode: true}, async (err, productInfo) => {
+	return await Product.find({}, {_id: false, title: true, pCode: true, reviewCnt: true}, async (err, productInfo) => {
 		if (err) console.log("Error on db")
 		return productInfo
 	}).skip(skipCount).limit(BULK_SIZE)

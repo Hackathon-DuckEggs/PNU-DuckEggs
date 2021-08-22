@@ -1,5 +1,4 @@
 const axios = require('axios')
-axios.defaults.timeout = 1000
 const cheerio = require('cheerio')
 const fs = require('fs')
 const {getMallReviewCount} = require('./getMallReview')
@@ -13,7 +12,8 @@ let requestConfig = {
 		"Accept" : "*/*",
 		"Accept-Encoding" : "gzip, deflate, br",
 		"Connection" : "keep-alive"
-	}
+	},
+	timeout: 1000
 }
 
 function sleep(ms){
