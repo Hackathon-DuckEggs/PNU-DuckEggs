@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import { ProductDetail } from "../components/productDetail";
 
 const Analysis = (props) => {
-    // console.log(props.location.state);
     const history = useHistory();
     const pCode = props.location.state;
 
