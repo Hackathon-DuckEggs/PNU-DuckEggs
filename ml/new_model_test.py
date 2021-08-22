@@ -1,10 +1,15 @@
 from keras.models import load_model
 from konlpy.tag import Okt
 from konlpy.tag import Kkma
-import json
-import pandas as pd
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
+
+import json
+import os
+import time
+import requests
+from watchdog.observers.polling import PollingObserver
+from watchdog.events import FileSystemEventHandler
 
 keywords_words = {
     '가격': ['가격', '가성비', '비싸', '저렴', '할인', '가격대비' '성비'],
@@ -32,11 +37,10 @@ keywords_words = {
     }
 keywords = keywords_words.keys()
 
+datafolder = os.getcwd().rsplit('/', 1)[0] + "/data"
+
 def separateLine(review):
     return [sentence for sentence in kkma.sentences(review)]
-
-def noIncludeKeywordLine(line):
-    f_notIncludeKeyword.write(line+"\n")
 
 def tokenize(sentence):
     stopwords = ['의','가','이','은','들','는','좀','잘','걍','과','도','를','으로','자','에','와','한','하다']
@@ -49,89 +53,110 @@ def loadTokenizer():
         word_index = json.load(json_file)
         tokenizer.word_index = word_index
 
-def updateKeywordCnt(keyword, flag):
-    if flag == 1:
-        keywords_cnt[keyword]['positive'] += 1
-    elif flag == 0:
-        keywords_cnt[keyword]['negative'] += 1
-    else:
-        print("exception in updateKeywordCnt()")
-        exit()
-
-
 def predictReview(keyword, line):
     line = line.replace("[^ㄱ-ㅎㅏ-ㅣ가-힣 ]","")
     line = line.replace('^ +', "")
     tk_line = tokenize(line)
     seq_line = tokenizer.texts_to_sequences([tk_line])
     data = pad_sequences(seq_line, maxlen = 30)
-    flag = 0
     score = float(model.predict(data))
-    if score > 0.5:
-        print(f"{line} ==> 긍정 ({round(score*100)}%)")
-        f_includeKeyword.write(f"{line} ==> 긍정 ({round(score*100)}%)\n")
-        flag = 1
-    else:
-        print(f"{line} ==> 부정 ({round(1-score)*100}%)")
-        f_includeKeyword.write(f"{line} ==> 부정 ({round(1-score)*100}%)\n")
-    updateKeywordCnt(keyword, flag)
+    return score
 
 def sentenceWithKeyword(line):
     keyword_flag = False
+    res = {}
     for keyword in keywords:
-        #print(keyword)
         if keyword == '만족' and keyword_flag == True:
             break
         for word in keywords_words[keyword]:
             if word in line:
-                print(keyword+"###########")
-                f_includeKeyword.write(keyword + "\t")
-                predictReview(keyword, line)
+                res['keyword'] = keyword
+                res['score'] = predictReview(keyword, line)
                 keyword_flag = True
                 break
-    if keyword_flag == False:
-        noIncludeKeywordLine(line)
+    return res
 
 def reviewLoad(reviews):
+    res = []
     for review in reviews:
         lines = separateLine(review)
+        analyzedRes = {}
         for line in lines:
-            sentenceWithKeyword(line)
+            line = line.replace(" ", "")
+            temp = sentenceWithKeyword(line)
+            if (temp) :
+                if temp['keyword'] in analyzedRes :
+                    analyzedRes[temp['keyword']] = (analyzedRes[temp['keyword']] + temp['score']) / 2
+                else :
+                    analyzedRes[temp['keyword']] = temp['score']
+        res.append(analyzedRes)
+    return res
 
 def loadVocabSize():
     f_vocabSize = open(vocabSize_path, "r")
     vocabSize = f_vocabSize.readline()
     return vocabSize
 
-def initCnt():
-    for keyword in keywords:
-        keywords_cnt[keyword] = {'positive':0, 'negative':0}
+###################
 
-def mostFreqKeyword5():
-    sortedCnt = sorted(keywords_cnt.items(), reverse=True, key=lambda item:(item[1]['positive'] + item[1]['negative']))
-    print(sortedCnt)
-    i = 0
-    for keyword in sortedCnt:
-        print(keyword[0], end="\t")
-        print("긍정 리뷰 수: ", keyword[1]['positive'], end="\t")
-        print("부정 리뷰 수: ", keyword[1]['negative'])
-        i += 1
-        if i >= KEYWORD_CNT:
-            break
+def printLog(log):
+    now = time.localtime()
+    print(("[%04d/%02d/%02d %02d:%02d:%02d] " + log) % (now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec), flush=True)
 
+class Target:
+    def __init__(self):
+        self.event_handler = None
+        self.observer = PollingObserver()
+        self.watchDir = datafolder + "/beforeAnalyze"
+
+    def run(self):
+        printLog('listening ' + self.watchDir)
+        self.event_handler = Handler()
+        self.observer.schedule(self.event_handler, self.watchDir)
+        self.observer.start()
+        try:
+            while True:
+                time.sleep(1)
+        except KeyboardInterrupt as e :
+            self.observer.stop()
+        except:
+            self.observer.stop()
+            printLog("Error")
+            self.observer.join()
+
+class Handler(FileSystemEventHandler):
+    def on_created(self, event):
+        fileName, fileExtension = os.path.splitext(os.path.basename(event.src_path))
+        printLog('before ' + fileName)
+        if fileExtension == '.json':
+            time.sleep(1)
+            with open(event.src_path, 'r', encoding='utf8') as file:
+                jsonData = json.load(file)
+                reviews = []
+                for obj in jsonData:
+                    reviews.append(obj['content'])
+                analyzedData = reviewLoad(reviews)
+            outputData = []
+            for i in range(len(jsonData)):
+                if analyzedData[i] : 
+                    outputData.append(jsonData[i])
+                    outputData[len(outputData) - 1]['rate'] = analyzedData[i]
+            with open(datafolder + "/afterAnalyze/" + fileName + '.json', 'w', encoding='utf8') as file:
+                json.dump(outputData, file, indent='\t', ensure_ascii=False)
+                os.remove(event.src_path)
+                printLog('after ' + fileName)
+            requests.post('http://localhost:5000/api/product/' + fileName, {'done': True})
+		
 
 if __name__ == "__main__":
     okt = Okt()
     kkma = Kkma()
-    model_save_path = './ml/review_model_all_new_model.h5'
-    tokenizer_path = "./ml/tokenizer_all_new_model.json"
-    vocabSize_path = "./ml/vocabSize_all_new_model.txt"
+    model_save_path = './data/review_model_all_new_model.h5'
+    tokenizer_path = "./data/tokenizer_all_new_model.json"
+    vocabSize_path = "./data/vocabSize_all_new_model.txt"
 
     ## 입력: output file경로
     KEYWORD_CNT = 5
-
-    f_includeKeyword = open("./ml/includeKeyword_all_new_model_pc_neg.txt", "w", encoding='UTF-8')
-    f_notIncludeKeyword = open("./ml/notIncludeKeyword_all_new_model_pc_neg.txt", "w", encoding='UTF-8')
     ###
 
     #저장한 ML model 불러오기
@@ -142,12 +167,5 @@ if __name__ == "__main__":
     tokenizer = Tokenizer(num_words=max_words)
     loadTokenizer()
 
-    keywords_cnt = {}
-    initCnt()
-    print(keywords_cnt)
-
-    reviews = [] ##리뷰 리스트 넣으시면 됩니다
-    reviewLoad(reviews)
-    f_includeKeyword.close()
-    f_notIncludeKeyword.close()
-    mostFreqKeyword5()
+    w = Target()
+    w.run()
