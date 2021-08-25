@@ -37,7 +37,7 @@ const Title = styled.h3`
   display: flex;
 `;
 
-// pCode 확인용
+// pCode 확인용 (임시)
 const Pcode = styled.span`
   color: #a1a1a1;
   font-size: 16px;
