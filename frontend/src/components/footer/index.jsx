@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import { Logo } from "../logo"
+import { useHistory } from 'react-router-dom';
 
 const FooterContainer = styled.div`
   margin-top: 1rem;
@@ -9,15 +9,24 @@ const FooterContainer = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
-  height: auto;
+  height: 10%;
   display: flex;
   justify-content: center;
+  img {
+    &:hover {
+      cursor: pointer;
+    }
 `;
 
 const Footer = () => {
+    const history = useHistory();
+    const movePath = path => {
+        history.push(path);
+    };
+
     return (
         <FooterContainer>
-            <Logo />
+            <img src="/imgs/textLogo.png" alt="logo" onClick={() => movePath('/')}/>
         </FooterContainer>
     );
 };

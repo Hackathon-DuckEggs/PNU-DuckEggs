@@ -14,6 +14,7 @@ const Preview = styled.div.attrs(props => ({
   justify-content: flex-end;
   flex: 0.4;
   padding: 0 2em;
+  margin-bottom: 0em;
   img {
     width: ${(props) => props.width || "50%"};
     height: ${(props) => props.height || "auto"};

@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Waiting } from "../components/waiting";
+import { ProductDetail } from "../components/productDetail";
 
-// http://duckegg.kro.kr/api/product/${pCode}
 const Analysis = (props) => {
   const pCode = props.location.state['pCode'];
-  const url = `http://duckegg.kro.kr/api/product/${pCode}`;
+  // console.log(props.location);
 
+  const url = `http://duckegg.kro.kr/api/product/${pCode}`;
   const [data, setData] = useState(null);
   const [show, setShow] = useState(false);
 
   const fetchData = async () => {
     try {
-    console.log(`show: ${show}`);
     if(!show){
       const result = await fetch(url);
       const data = await result.json();
       setData(data);
-      if(data['analyzed'] == 1) setShow(true);
+      if(Number(data['analyzed']) === 1) setShow(true);
     }
     } catch(err) {
       setShow(false);
@@ -24,16 +24,27 @@ const Analysis = (props) => {
   }
 
   useEffect(() => {
-    let id = setInterval(() => {
+    let timer = setInterval(() => {
       fetchData();
+      // console.log(data);
     }, 10000);
-    return () => clearInterval(id);
-  }, [])
+    return () => clearInterval(timer);
+  }, [fetchData, data])
 
-  console.log(data);
-  
+  if(data == null) return <Waiting />
+
+  // console.log(data["productInfo"]["specs"]);
+
   return show ? (
-    <div>show is true, display review data</div>
+    // display review data
+    <>
+      <ProductDetail
+        pCode={props.location.state["pCode"]}
+        title={props.location.state["title"]}
+        previewSrc={props.location.state["previewSrc"]}
+        spec={data["productInfo"]["specs"]}
+       />
+    </>
   ) : (
     <Waiting />
   );

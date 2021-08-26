@@ -51,6 +51,8 @@ export function Product(props) {
       pathname: `/analysis/${pCode}`,
       state: {
         pCode: pCode,
+        title: title,
+        previewSrc: previewSrc,
       }
     }}>
         <ProductContainer>

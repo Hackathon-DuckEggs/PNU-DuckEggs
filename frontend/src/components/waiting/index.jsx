@@ -4,12 +4,14 @@ import { Spinner } from "react-awesome-spinners";
 
 const WaitContainer = styled.div`
   width: 100%;
+  height: 100%;
   min-height: 6em;
   display: flex;
   flex-direction: column;
   padding: 6px 8px;
   align-items: center;
-  margin-bottom: 2em;
+  justify-content: center;
+  margin: 2em 0em;
 `;
 
 const Message = styled.h3`
