@@ -9,6 +9,9 @@ const FooterContainer = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
 `;
 
 const Footer = () => {

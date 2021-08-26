@@ -1,8 +1,6 @@
 import React from "react";
-import { useHistory } from 'react-router-dom';
 import styled from "styled-components";
-import { ProductDetail } from "../productDetail";
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const ProductContainer = styled.div`
   width: 100%;
@@ -47,11 +45,6 @@ const Pcode = styled.span`
 
 export function Product(props) {
   const {previewSrc, title, pCode} = props;
-  const history = useHistory();
-
-  const movePath = path => {
-    history.push(path);
-  };
 
   return (
     <Link to={{
@@ -62,7 +55,7 @@ export function Product(props) {
     }}>
         <ProductContainer>
           <Preview>
-            <img src={previewSrc} />
+            <img src={previewSrc} alt="preview"/>
           </Preview>
           <Title>{title}</Title>
           <Pcode>{pCode}</Pcode>

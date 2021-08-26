@@ -6,8 +6,8 @@ const AppContainer = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   margin-top: 8em;
 `;
 

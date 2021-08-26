@@ -10,7 +10,6 @@ export function useDebounce(value, timeout, callback) {
 
   useEffect(() => {
     clearTimer();
-
     if (value && callback) {
       const newTimer = setTimeout(callback, timeout);
       setTimer(newTimer);
