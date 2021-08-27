@@ -15,7 +15,7 @@ export const ReviewScore = (props) => {
   const rate = props.rate;
   const keywordCnt = Object.keys(rate).length;
 
-  let sortedRate = [];
+  const sortedRate = [];
   for (const keyword in rate) {
     sortedRate.push([keyword, rate[keyword]]);
   }

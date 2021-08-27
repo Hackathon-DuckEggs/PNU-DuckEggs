@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { SearchBar } from "../components/searchBar";
 
-const AppContainer = styled.div`
+const HomeContainer = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
@@ -13,9 +13,9 @@ const AppContainer = styled.div`
 
 const Home = () => {
   return (
-    <AppContainer>
+    <HomeContainer>
       <SearchBar />
-    </AppContainer>
+    </HomeContainer>
   );
 };
 

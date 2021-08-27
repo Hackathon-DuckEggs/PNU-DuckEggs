@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 import { Waiting } from "../components/waiting";
 import { ProductDetail } from "../components/productDetail";
 import { ReviewScore } from "../components/reviewScore";
+import { KeywordCloud } from "../components/keywordCloud";
+
+const AnalysisContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  margin-top: 8em;
+`;
 
 const Analysis = (props) => {
   const pCode = props.location.state["pCode"];
@@ -38,7 +47,7 @@ const Analysis = (props) => {
 
   return show ? (
     // display review data
-    <>
+    <AnalysisContainer>
       <ProductDetail
         pCode={props.location.state["pCode"]}
         title={props.location.state["title"]}
@@ -46,7 +55,8 @@ const Analysis = (props) => {
         spec={data["productInfo"]["specs"]}
       />
       <ReviewScore rate={data["productInfo"]["rates"]} />
-    </>
+      <KeywordCloud keyword={data["productInfo"]["rates"]} />
+    </AnalysisContainer>
   ) : (
     <Waiting />
   );
