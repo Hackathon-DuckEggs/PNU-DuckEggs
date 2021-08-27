@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const ProductContainer = styled.div`
   width: 100%;
@@ -11,7 +11,7 @@ const ProductContainer = styled.div`
   align-items: center;
 
   &:hover {
-    background-color: #EEEEEE;
+    background-color: #eeeeee;
     cursor: pointer;
   }
 `;
@@ -44,25 +44,26 @@ const Pcode = styled.span`
 `;
 
 export function Product(props) {
-  const {previewSrc, title, pCode} = props;
+  const { previewSrc, title, pCode } = props;
 
   return (
-    <Link to={{
-      pathname: `/analysis/${pCode}`,
-      state: {
-        pCode: pCode,
-        title: title,
-        previewSrc: previewSrc,
-      }
-    }}>
-        <ProductContainer>
-          <Preview>
-            <img src={previewSrc} alt="preview"/>
-          </Preview>
-          <Title>{title}</Title>
-          <Pcode>{pCode}</Pcode>
-        </ProductContainer>
+    <Link
+      to={{
+        pathname: `/analysis/${pCode}`,
+        state: {
+          pCode: pCode,
+          title: title,
+          previewSrc: previewSrc,
+        },
+      }}
+    >
+      <ProductContainer>
+        <Preview>
+          <img src={previewSrc} alt="preview" />
+        </Preview>
+        <Title>{title}</Title>
+        <Pcode>{pCode}</Pcode>
+      </ProductContainer>
     </Link>
   );
-  
 }

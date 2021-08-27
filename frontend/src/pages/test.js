@@ -11,11 +11,7 @@ const AppContainer = styled.div`
 `;
 
 const Test = () => {
-  return (
-    <AppContainer>
-      test
-    </AppContainer>
-  );
-}
+  return <AppContainer>test</AppContainer>;
+};
 
 export default Test;

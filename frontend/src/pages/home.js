@@ -17,6 +17,6 @@ const Home = () => {
       <SearchBar />
     </AppContainer>
   );
-}
+};
 
 export default Home;

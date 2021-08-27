@@ -1,7 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { ExpandMore } from '@material-ui/icons';
-import { Accordion, AccordionSummary, AccordionDetails} from '@material-ui/core';
+import { ExpandMore } from "@material-ui/icons";
+import {
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from "@material-ui/core";
 
 const ProductSpecContainer = styled.div`
   width: 100%;
@@ -42,7 +46,7 @@ const Contents = styled.span`
 
 export const ProductSpec = (props) => {
   return (
-    <ProductSpecContainer>   
+    <ProductSpecContainer>
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMore />}>
           상세 정보
@@ -51,9 +55,10 @@ export const ProductSpec = (props) => {
         <AccordionDetails>
           <SpecContentsContainer>
             {Object.keys(props.spec).map((item) => (
-                <Specs>
-                    <Title>{item}</Title><Contents>{props.spec[item]}</Contents>
-                </Specs>
+              <Specs>
+                <Title>{item}</Title>
+                <Contents>{props.spec[item]}</Contents>
+              </Specs>
             ))}
           </SpecContentsContainer>
         </AccordionDetails>

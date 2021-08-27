@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { Waiting } from "../components/waiting";
 import { ProductDetail } from "../components/productDetail";
+import { ProgressBar } from "../components/progressBar";
 
 const Analysis = (props) => {
-  const pCode = props.location.state['pCode'];
+  const pCode = props.location.state["pCode"];
   // console.log(props.location);
 
   const url = `http://duckegg.kro.kr/api/product/${pCode}`;
@@ -12,16 +13,16 @@ const Analysis = (props) => {
 
   const fetchData = async () => {
     try {
-    if(!show){
-      const result = await fetch(url);
-      const data = await result.json();
-      setData(data);
-      if(Number(data['analyzed']) === 1) setShow(true);
-    }
-    } catch(err) {
+      if (!show) {
+        const result = await fetch(url);
+        const data = await result.json();
+        setData(data);
+        if (Number(data["analyzed"]) === 1) setShow(true);
+      }
+    } catch (err) {
       setShow(false);
-    } 
-  }
+    }
+  };
 
   useEffect(() => {
     let timer = setInterval(() => {
@@ -29,9 +30,9 @@ const Analysis = (props) => {
       // console.log(data);
     }, 10000);
     return () => clearInterval(timer);
-  }, [fetchData, data])
+  }, [fetchData, data]);
 
-  if(data == null) return <Waiting />
+  if (data == null) return <Waiting />;
 
   // console.log(data["productInfo"]["specs"]);
 
@@ -43,11 +44,12 @@ const Analysis = (props) => {
         title={props.location.state["title"]}
         previewSrc={props.location.state["previewSrc"]}
         spec={data["productInfo"]["specs"]}
-       />
+      />
+      <ProgressBar />
     </>
   ) : (
     <Waiting />
   );
-}
+};
 
 export default Analysis;

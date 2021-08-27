@@ -27,12 +27,14 @@ const Message = styled.h3`
 
 export function Waiting(props) {
   return (
-    <>
     <WaitContainer>
-      <Message>리뷰 분석 중입니다. 조금만 기다려 주세요.<br />(약 1분 소요)</Message>
-      <Spinner color= '#FFAA4C'/>
+      <Message>
+        리뷰 분석 중입니다. 조금만 기다려 주세요.
+        <br />
+        (약 1분 소요)
+      </Message>
+      <Spinner color="#FFAA4C" />
     </WaitContainer>
-    </>
   );
 }
 

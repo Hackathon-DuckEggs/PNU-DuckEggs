@@ -19,7 +19,7 @@ const SearchBarContainer = styled(motion.div)`
   background-color: #ff;
   border: thick solid;
   border-radius: 6px;
-  border-color: #FFAA4C;
+  border-color: #ffaa4c;
 `;
 
 const SearchInputContainer = styled.div`
@@ -56,7 +56,7 @@ const SearchInput = styled.input`
 `;
 
 const SearchIcon = styled.span`
-  color: #FFAA4C;
+  color: #ffaa4c;
   font-size: 27px;
   margin-right: 10px;
   margin-top: 0px;
@@ -64,7 +64,7 @@ const SearchIcon = styled.span`
 `;
 
 const CloseIcon = styled(motion.span)`
-  color: #FFAA4C;
+  color: #ffaa4c;
   font-size: 23px;
   vertical-align: middle;
   transition: all 200ms ease-in-out;
@@ -79,8 +79,8 @@ const LineSeperator = styled.span`
   display: flex;
   min-width: 100%;
   min-height: 2px;
-  background-color: #FFAA4C;
-  opacity:0.2;
+  background-color: #ffaa4c;
+  opacity: 0.2;
 `;
 
 const SearchContent = styled.div`
@@ -173,7 +173,8 @@ export function SearchBar(props) {
 
     if (response) {
       console.log("Response: ", response.data);
-      if (response.data && response.data['list'].length === 0) setNoProduct(true);
+      if (response.data && response.data["list"].length === 0)
+        setNoProduct(true);
       setProduct(response.data);
     }
 
@@ -234,15 +235,15 @@ export function SearchBar(props) {
             </LoadingWrapper>
           )}
           {!isLoading && !isEmpty && (
-            <>         
-              {products.list.map(item => (
+            <>
+              {products.list.map((item) => (
                 <Product
                   key={item.pCode}
                   title={item.title}
                   previewSrc={item.image}
                   pCode={item.pCode}
                 />
-              ))} 
+              ))}
             </>
           )}
         </SearchContent>

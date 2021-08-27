@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
-const Preview = styled.div.attrs(props => ({
+const Preview = styled.div.attrs((props) => ({
   width: props.width || "50%",
   height: props.width || "auto",
 }))`
@@ -26,15 +26,15 @@ const Preview = styled.div.attrs(props => ({
 
 export function Logo(props) {
   const history = useHistory();
-  const movePath = path => {
+  const movePath = (path) => {
     history.push(path);
   };
 
   return (
-    <Preview width={props.width} onClick={() => movePath('/')}>
-      <img src="/imgs/textLogo.png" alt="logo"/>
+    <Preview width={props.width} onClick={() => movePath("/")}>
+      <img src="/imgs/textLogo.png" alt="logo" />
     </Preview>
   );
 }
-  
-  export default Logo;
+
+export default Logo;

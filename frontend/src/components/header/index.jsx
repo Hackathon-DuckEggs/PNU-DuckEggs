@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { SearchBar } from "../searchBar";
-import { Logo } from "../logo"
+import { Logo } from "../logo";
 
 const HeaderContainer = styled.div`
   position: fixed;
@@ -16,11 +16,10 @@ const HeaderContainer = styled.div`
   align-items: center;
 `;
 
-
 export function Header() {
-  return ( 
+  return (
     <HeaderContainer>
-      <Logo width="300%"/>
+      <Logo width="300%" />
       <SearchBar />
     </HeaderContainer>
   );

@@ -1,13 +1,17 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { ProductSpec } from "../productSpec";
 
 const StyledLink = styled(Link)`
+  text-decoration: none;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
     text-decoration: none;
-    &:focus, &:hover, &:visited, &:link, &:active {
-        text-decoration: none;
-    }
+  }
 `;
 
 const ProductDetailContainer = styled.div`
@@ -33,7 +37,7 @@ const Preview = styled.div`
   width: 100%;
   height: auto;
   display: flex;
-  border: 1.5px solid #E8E8E8;
+  border: 1.5px solid #e8e8e8;
   flex: 0.4;
   justify-content: center;
   algin-items: center;
@@ -79,25 +83,26 @@ const Button = styled.button`
 `;
 
 export function ProductDetail(props) {
-  const {previewSrc, title, pCode, spec} = props;
+  const { previewSrc, title, pCode, spec } = props;
   return (
     <ProductDetailContainer>
       <ProductBasicContainer>
         <Preview>
-          <img src={previewSrc} alt="preview"/>
+          <img src={previewSrc} alt="preview" />
         </Preview>
         <Title>{title}</Title>
         <ButtonContainer>
-          <StyledLink to={{
-            pathname: `/test`,
-            state: {
-            }
-          }}>
+          <StyledLink
+            to={{
+              pathname: `/test`,
+              state: {},
+            }}
+          >
             <Button>상품 비교하기</Button>
           </StyledLink>
-          <ProductSpec spec={spec}/>
+          <ProductSpec spec={spec} />
         </ButtonContainer>
       </ProductBasicContainer>
-  </ProductDetailContainer> 
+    </ProductDetailContainer>
   );
 }

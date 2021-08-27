@@ -1,9 +1,9 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
-import Analysis from './pages/analysis';
-import Home from './pages/home';
-import Footer from './components/footer';
-import Test from './pages/test';
+import React from "react";
+import { Route } from "react-router-dom";
+import Analysis from "./pages/analysis";
+import Home from "./pages/home";
+import Footer from "./components/footer";
+import Test from "./pages/test";
 
 // <Route path="/analysis/:key" component={Analysis} />
 
