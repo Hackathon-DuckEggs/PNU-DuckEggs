@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Waiting } from "../components/waiting";
 import { ProductDetail } from "../components/productDetail";
-import { ProgressBar } from "../components/progressBar";
+import { ReviewScore } from "../components/reviewScore";
 
 const Analysis = (props) => {
   const pCode = props.location.state["pCode"];
@@ -45,7 +45,7 @@ const Analysis = (props) => {
         previewSrc={props.location.state["previewSrc"]}
         spec={data["productInfo"]["specs"]}
       />
-      <ProgressBar />
+      <ReviewScore rate={data["productInfo"]["rates"]} />
     </>
   ) : (
     <Waiting />

@@ -91,6 +91,7 @@ export function ProductDetail(props) {
           <img src={previewSrc} alt="preview" />
         </Preview>
         <Title>{title}</Title>
+        <Title>{pCode}</Title>
         <ButtonContainer>
           <StyledLink
             to={{

@@ -3,11 +3,16 @@ import styled from "styled-components";
 import { CgSmile, CgSmileSad } from "react-icons/cg";
 
 const ProgressbarContainer = styled.div`
-  display: flex;
-  justify-contents: center;
-  align-item: center;
+  displey: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  margin: 0.5em;
+`;
+
+const ProgressbarContent = styled.div`
+  display: flex;
+  margin-left: 0.2em;
 `;
 
 const Progressbar = styled.div`
@@ -15,8 +20,8 @@ const Progressbar = styled.div`
   border-radius: 20px;
   position: relative;
   margin: 0.2em 1em;
-  height: 30px;
-  width: 300px;
+  height: 2em;
+  width: 40em;
 `;
 
 const ProgressDone = styled.div`
@@ -33,12 +38,11 @@ const ProgressDone = styled.div`
   transition: 1s ease 0.3s;
 `;
 
-const Title = styled.h3`
-  text-align: center;
+const Keyword = styled.h3`
+  display: inline-block;
   font-size: 15px;
+  text-align: center;
   color: #000;
-  flex: 2;
-  display: flex;
 `;
 
 const SadIcon = styled.span`
@@ -53,29 +57,36 @@ const SmileIcon = styled.span`
   vertical-align: middle;
 `;
 
-export const ProgressBar = () => {
+export const ProgressBar = (props) => {
   const [style, setStyle] = useState({});
+  const keyword = props.review[0];
+  const keywordCnt = props.review[1]["cnt"];
+  const score = Math.round(props.review[1]["score"] * 100).toFixed(0);
 
   setTimeout(() => {
     const newStyle = {
       opacity: 1,
-      // width: `${done}%`
-      width: `70%`,
+      width: `${score}%`,
     };
     setStyle(newStyle);
   }, 200);
 
   return (
     <ProgressbarContainer>
-      <SadIcon>
-        <CgSmileSad />
-      </SadIcon>
-      <Progressbar>
-        <ProgressDone style={style}>70점</ProgressDone>
-      </Progressbar>
-      <SmileIcon>
-        <CgSmile />
-      </SmileIcon>
+      <Keyword>
+        {keyword} (언급횟수: {keywordCnt}번)
+      </Keyword>
+      <ProgressbarContent>
+        <SadIcon>
+          <CgSmileSad />
+        </SadIcon>
+        <Progressbar>
+          <ProgressDone style={style}>{score}점</ProgressDone>
+        </Progressbar>
+        <SmileIcon>
+          <CgSmile />
+        </SmileIcon>
+      </ProgressbarContent>
     </ProgressbarContainer>
   );
 };
