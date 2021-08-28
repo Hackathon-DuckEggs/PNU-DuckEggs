@@ -115,9 +115,7 @@ const Analysis = (props) => {
           <StyledLink
             to={{
               pathname: `/review/${pCode}`,
-              state: {
-                pCode: pCode,
-              },
+              state: { pCode: pCode },
             }}
             target="_blank"
           >
