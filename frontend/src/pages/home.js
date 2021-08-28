@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { SearchBar } from "../components/searchBar";
+import { Logo } from "../components/logo";
 
 const HomeContainer = styled.div`
   width: 100%;
@@ -11,9 +12,16 @@ const HomeContainer = styled.div`
   margin-top: 8em;
 `;
 
+const Blank = styled.div`
+  width: 100%;
+  height: 4em;
+`;
+
 const Home = () => {
   return (
     <HomeContainer>
+      <Logo width="40%" />
+      <Blank />
       <SearchBar />
     </HomeContainer>
   );

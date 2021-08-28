@@ -35,11 +35,15 @@ const Title = styled.h3`
   font-size: 16px;
   word-break: keep-all;
   color: #383838;
+  font-family: "NotoSansKR-Bold";
+  font-weight: 700;
 `;
 
 const Contents = styled.span`
   font-size: 16px;
   word-break: keep-all;
+  font-family: "NotoSansKR-Medium";
+  font-weight: 500;
   color: #000;
   margin-bottom: 4px;
 `;
@@ -49,9 +53,8 @@ export const ProductSpec = (props) => {
     <ProductSpecContainer>
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMore />}>
-          상세 정보
+          <Title>상세 정보</Title>
         </AccordionSummary>
-
         <AccordionDetails>
           <SpecContentsContainer>
             {Object.keys(props.spec).map((item) => (

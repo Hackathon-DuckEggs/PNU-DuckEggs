@@ -8,25 +8,30 @@ const ProgressbarContainer = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
+  width: 100%;
 `;
 
 const ProgressbarContent = styled.div`
   display: flex;
+  width: 100%;
   margin-left: 0.2em;
+  justify-content: center;
+  text-align: center;
 `;
 
 const Progressbar = styled.div`
   background-color: #d8d8d8;
   border-radius: 20px;
   position: relative;
-  margin: 0.2em 1em;
-  height: 2em;
-  width: 40em;
+  margin: 0.2% 1%;
+  height: 10%;
+  width: 100%;
+  max-width: 1000px;
 `;
 
 const ProgressDone = styled.div`
-  background: linear-gradient(to left, #f2709c, #ff9472);
-  box-shadow: 0 3px 3px -5px #f2709c, 0 2px 5px #f2709c;
+  background: linear-gradient(to left, #ff4d3f, #ff9472);
+  box-shadow: 0 3px 3px -5px #ff4d3f, 0 2px 5px #ff4d3f;
   border-radius: 20px;
   color: #fff;
   display: flex;
@@ -40,7 +45,9 @@ const ProgressDone = styled.div`
 
 const Keyword = styled.h3`
   display: inline-block;
-  font-size: 15px;
+  font-size: 1em;
+  font-family: "NotoSansKR-Bold";
+  font-weight: 700;
   text-align: center;
   color: #000;
 `;

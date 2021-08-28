@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
-const Preview = styled.div.attrs((props) => ({
+const LogoImage = styled.div.attrs((props) => ({
   width: props.width || "50%",
   height: props.width || "auto",
 }))`
-  width: 100%;
+  margin: -1em;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -14,7 +14,6 @@ const Preview = styled.div.attrs((props) => ({
   justify-content: flex-end;
   flex: 0.4;
   padding: 0 2em;
-  margin-bottom: 0em;
   img {
     width: ${(props) => props.width || "50%"};
     height: ${(props) => props.height || "auto"};
@@ -31,9 +30,9 @@ export function Logo(props) {
   };
 
   return (
-    <Preview width={props.width} onClick={() => movePath("/")}>
-      <img src="/imgs/textLogo.png" alt="logo" />
-    </Preview>
+    <LogoImage width={props.width} onClick={() => movePath("/")}>
+      <img src="/imgs/fullLogo.png" alt="logo" />
+    </LogoImage>
   );
 }
 

@@ -19,8 +19,7 @@ const ProductDetailContainer = styled.div`
   height: 50%;
   display: flex;
   flex-direction: column;
-  padding: 6px 8px;
-  margin: 2em;
+  padding: 0 8px;
 `;
 
 const ProductBasicContainer = styled.div`
@@ -31,13 +30,13 @@ const ProductBasicContainer = styled.div`
   flex-direction: column;
   algin-items: center;
   justify-content: center;
+  border: 1.5px solid #e8e8e8;
 `;
 
 const Preview = styled.div`
   width: 100%;
   height: auto;
   display: flex;
-  border: 1.5px solid #e8e8e8;
   flex: 0.4;
   justify-content: center;
   algin-items: center;
@@ -69,6 +68,8 @@ const ButtonContainer = styled.div`
 const Button = styled.button`
   width: 100%;
   padding: 1rem 0.7rem;
+  font-family: "NotoSansKR-Bold";
+  font-weight: 700;
   font-size: 1rem;
   display: flex;
   flex-direction: column;
@@ -91,7 +92,6 @@ export function ProductDetail(props) {
           <img src={previewSrc} alt="preview" />
         </Preview>
         <Title>{title}</Title>
-        <Title>{pCode}</Title>
         <ButtonContainer>
           <StyledLink
             to={{
