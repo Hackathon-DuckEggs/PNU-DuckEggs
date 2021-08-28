@@ -63,7 +63,7 @@ const Review = (props) => {
       <Title>총 리뷰 {reviewCnt}개 (그래프가 로드될 때까지 기다려주세요)</Title>
       {reviewList.map((item) => (
         <ReviewDetail
-          reviewData={item.date}
+          reviewDate={item.date}
           reviewSrc={item.src}
           reviewContents={item.content}
           reviewRate={item.rate}

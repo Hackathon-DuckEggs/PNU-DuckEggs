@@ -26,11 +26,7 @@ const AccordianContainer = styled.div`
 `;
 
 export const ReviewDetail = (props) => {
-  const { reviewContents, reviewData, reviewRate } = props;
-  console.log(reviewContents);
-  console.log(reviewData);
-  console.log(reviewRate);
-
+  const { reviewDate, reviewSrc, reviewContents, reviewRate } = props;
   const rateChart = [["키워드", "점수"]];
   Object.keys(reviewRate).map((item) => {
     rateChart.push([item, reviewRate[item] * 100]);
@@ -41,7 +37,7 @@ export const ReviewDetail = (props) => {
       <AccordianContainer>
         <Accordion>
           <AccordionSummary expandIcon={<ExpandMore />}>
-            리뷰 원문 보기
+            리뷰 원문 보기 (날짜: {reviewDate} 출처: {reviewSrc})
           </AccordionSummary>
           <AccordionDetails>
             <p>{reviewContents}</p>
@@ -50,7 +46,7 @@ export const ReviewDetail = (props) => {
       </AccordianContainer>
       <Chart
         width={"80%"}
-        height={"50%"}
+        height={"100%"}
         chartType="Bar"
         loader={<div>Loading Chart</div>}
         data={rateChart}
@@ -64,6 +60,10 @@ export const ReviewDetail = (props) => {
           hAxis: {
             title: "점수",
             minValue: 0,
+            viewWindow: {
+              min: 0,
+              max: 100,
+            },
           },
           vAxis: {
             title: "키워드",
@@ -72,6 +72,14 @@ export const ReviewDetail = (props) => {
           axes: {
             y: {
               0: { side: "left" },
+            },
+            x: {
+              all: {
+                range: {
+                  max: 100,
+                  min: 0,
+                },
+              },
             },
           },
         }}
