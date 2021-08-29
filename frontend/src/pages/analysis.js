@@ -20,10 +20,20 @@ const Title = styled.div`
   display: inline-block;
 `;
 
+const Summary = styled.div`
+  font-family: "NotoSansKR-Bold";
+  font-weight: 700;
+  margin-left: 10px;
+  font-size: 1em;
+  color: #a5a4a2;
+  display: block;
+`;
+
 const AnalysisContainer = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  justify-content: center;
   margin: 8em 2em;
 `;
 
@@ -109,6 +119,7 @@ const Analysis = (props) => {
       />
       <ReviewResultContainer>
         <Title>Keyword 분석</Title>
+        <Summary>키워드의 출현 빈도를 나타냅니다.</Summary>
         <KeywordCloud keyword={data["productInfo"]["rates"]} />
         <TitleContainer>
           <Title>Keyword 점수</Title>
@@ -125,6 +136,7 @@ const Analysis = (props) => {
             </SmallTitle>
           </StyledLink>
         </TitleContainer>
+        <Summary>상위 10개의 키워드에 대해서 제공합니다.</Summary>
         <ReviewScore rate={data["productInfo"]["rates"]} />
       </ReviewResultContainer>
     </AnalysisContainer>

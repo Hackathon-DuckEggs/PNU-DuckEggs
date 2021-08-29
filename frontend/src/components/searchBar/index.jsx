@@ -195,7 +195,7 @@ export function SearchBar(props) {
           <IoSearch />
         </SearchIcon>
         <SearchInput
-          placeholder="제품 이름 검색"
+          placeholder="분석할 제품 이름 검색"
           onFocus={expandContainer}
           ref={inputRef}
           value={searchQuery}

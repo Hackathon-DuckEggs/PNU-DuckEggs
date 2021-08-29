@@ -16,10 +16,11 @@ const StyledLink = styled(Link)`
 
 const ProductDetailContainer = styled.div`
   width: 20%;
+  max-width: 300px;
   height: 50%;
   display: flex;
   flex-direction: column;
-  padding: 0 8px;
+  padding: 0 1em;
 `;
 
 const ProductBasicContainer = styled.div`
@@ -74,7 +75,7 @@ const Button = styled.button`
   display: flex;
   flex-direction: column;
   algin-items: space-between;
-  background: rgba(255, 170, 76, 0.5);
+  background: #ff9472;
   border: none;
   border-radius: 3px;
   box-shadow: 0px 0px 0px 10px 5px black;
@@ -95,8 +96,8 @@ export function ProductDetail(props) {
         <ButtonContainer>
           <StyledLink
             to={{
-              pathname: `/test`,
-              state: {},
+              pathname: `/versus/${pCode}`,
+              state: { pCode: pCode },
             }}
           >
             <Button>상품 비교하기</Button>

@@ -10,6 +10,7 @@ import {
 
 const ReviewDetailContainer = styled.div`
   width: 80%;
+  height: 100%;
   max-width: 1000px;
   display: flex;
   flex-direction: column;
@@ -45,8 +46,8 @@ export const ReviewDetail = (props) => {
         </Accordion>
       </AccordianContainer>
       <Chart
-        width={"80%"}
-        height={"100%"}
+        width={"100%"}
+        height={"200%"}
         chartType="Bar"
         loader={<div>Loading Chart</div>}
         data={rateChart}

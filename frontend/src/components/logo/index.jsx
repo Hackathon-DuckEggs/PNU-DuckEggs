@@ -10,6 +10,7 @@ const LogoImage = styled.div.attrs((props) => ({
   height: auto;
   display: flex;
   flex-direction: column;
+  max-width: 1000px;
   align-items: center;
   justify-content: flex-end;
   flex: 0.4;
