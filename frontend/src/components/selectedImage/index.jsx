@@ -28,7 +28,6 @@ const Message = styled.span`
 const SelectedImage = (props) => {
   const product = props.product;
   if (product == null) {
-    console.log("image is null");
     return <Message>상품을 선택해주세요</Message>;
   }
 

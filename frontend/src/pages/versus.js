@@ -87,6 +87,8 @@ const Versus = (props) => {
   const [selectionFirst, setselectionFirst] = useState(false);
   const [selectionSecond, setselectionSecond] = useState(false);
 
+  // console.log(selectionFirst);
+
   return (
     <AppContainer>
       <Header />
@@ -101,8 +103,8 @@ const Versus = (props) => {
           to={{
             pathname: `/loading/`,
             state: {
-              pCodeFirst: selectionFirst,
-              pCodeSecond: selectionSecond,
+              selectionFirst: selectionFirst,
+              selectionSecond: selectionSecond,
             },
           }}
         >

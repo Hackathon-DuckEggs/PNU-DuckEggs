@@ -27,13 +27,13 @@ const Title = styled.h3`
 `;
 
 export const VersusLoading = (props) => {
-  const { pCodeFirst, pCodeSecond } = props.location.state;
+  const { selectionFirst, selectionSecond } = props.location.state;
   const [dataFirst, setDataFirst] = useState(null);
   const [dataSecond, setDataSecond] = useState(null);
   const [show, setShow] = useState(false);
 
-  const urlFirst = `http://duckegg.kro.kr/api/product/${pCodeFirst}`;
-  const urlSecond = `http://duckegg.kro.kr/api/product/${pCodeSecond}`;
+  const urlFirst = `http://duckegg.kro.kr/api/product/${selectionFirst["pCode"]}`;
+  const urlSecond = `http://duckegg.kro.kr/api/product/${selectionSecond["pCode"]}`;
 
   const fetchData = async () => {
     try {
