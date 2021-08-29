@@ -3,11 +3,22 @@ import styled from "styled-components";
 import { IoClose } from "react-icons/io5";
 import { useState } from "react";
 import ReactFetchAutocomplete from "react-fetch-autocomplete";
+import SelectedImage from "../selectedImage";
+
+const SelectContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-component: center;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  height: 30em;
+`;
 
 const SearchBarContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 30em;
+  width: 25em;
   height: 3.8em;
   background-color: #ff;
   border: thick solid;
@@ -51,6 +62,7 @@ const SearchInput = styled.input`
 
 const ProductConatiner = styled.div`
   width: 100%;
+  height: 100%;
   min-height: 6em;
   display: flex;
   border-bottom: 2px solid rgba(255, 170, 76, 0.2);
@@ -102,14 +114,22 @@ const Message = styled.span`
   justify-self: center;
 `;
 
+const SearchContent = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+`;
+
 const suggestionParser = (data) =>
   data.list.map((item) => ({
     description: item.title,
-    coords: item.pCode,
+    pCode: item.pCode,
     image: item.image,
   }));
 
-export const ProductSelect = () => {
+export const ProductSelect = (props) => {
   const [value, setValue] = useState("");
   const [selection, setSelection] = useState(null);
   const fetchUrl = ({ searchQuery }) =>
@@ -118,50 +138,58 @@ export const ProductSelect = () => {
   const resetInputField = () => {
     setValue("");
     setSelection(null);
+    props.setData(false);
   };
 
+  if (selection != null) {
+    props.setData(selection);
+  }
+
   return (
-    <ReactFetchAutocomplete
-      value={value}
-      onChange={setValue}
-      onSelect={setSelection}
-      fetchUrl={fetchUrl}
-      suggestionParser={suggestionParser}
-    >
-      {({ inputProps, getSuggestionProps, suggestions, error, loading }) => {
-        if (error)
-          return <Message>에러가 발생했습니다. 새로고침 해주세요.</Message>;
-        return (
-          <SearchBarContainer>
-            <SearchInputContainer>
-              <SearchInput
-                {...inputProps({
-                  placeholder: "비교할 제품 이름을 입력하세요",
-                })}
-              />
-              <CloseIcon onClick={resetInputField}>
-                <IoClose />
-              </CloseIcon>
-            </SearchInputContainer>
-            {loading && <Message>로딩 중..</Message>}
-            {suggestions.length > 0 && (
-              <div>
-                {suggestions.map((suggestion) => (
-                  <ProductConatiner>
-                    <Preview>
-                      <img src={suggestion.image} alt="preview" />
-                    </Preview>
-                    <Title {...getSuggestionProps(suggestion)}>
-                      {suggestion.description}
-                    </Title>
-                  </ProductConatiner>
-                ))}
-              </div>
-            )}
-          </SearchBarContainer>
-        );
-      }}
-    </ReactFetchAutocomplete>
+    <SelectContainer>
+      <SelectedImage product={selection} />
+      <ReactFetchAutocomplete
+        value={value}
+        onChange={setValue}
+        onSelect={setSelection}
+        fetchUrl={fetchUrl}
+        suggestionParser={suggestionParser}
+      >
+        {({ inputProps, getSuggestionProps, suggestions, error, loading }) => {
+          if (error)
+            return <Message>에러가 발생했습니다. 새로고침 해주세요.</Message>;
+          return (
+            <SearchBarContainer>
+              <SearchInputContainer>
+                <SearchInput
+                  {...inputProps({
+                    placeholder: "비교할 제품 이름을 입력하세요",
+                  })}
+                />
+                <CloseIcon onClick={resetInputField}>
+                  <IoClose />
+                </CloseIcon>
+              </SearchInputContainer>
+              {loading && <Message>로딩 중..</Message>}
+              {suggestions.length > 0 && (
+                <SearchContent>
+                  {suggestions.map((suggestion) => (
+                    <ProductConatiner>
+                      <Preview>
+                        <img src={suggestion.image} alt="preview" />
+                      </Preview>
+                      <Title {...getSuggestionProps(suggestion)}>
+                        {suggestion.description}
+                      </Title>
+                    </ProductConatiner>
+                  ))}
+                </SearchContent>
+              )}
+            </SearchBarContainer>
+          );
+        }}
+      </ReactFetchAutocomplete>
+    </SelectContainer>
   );
 };
 
