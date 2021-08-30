@@ -87,7 +87,7 @@ const Versus = (props) => {
   const [selectionFirst, setselectionFirst] = useState(false);
   const [selectionSecond, setselectionSecond] = useState(false);
 
-  // console.log(selectionFirst);
+  console.log(selectionFirst);
 
   return (
     <AppContainer>
