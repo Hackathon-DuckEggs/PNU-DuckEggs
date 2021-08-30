@@ -9,7 +9,7 @@ const HeaderContainer = styled.div`
   left: 0;
   right: 0;
   width: 100%;
-  height: 10%;
+  height: 8%;
   max-height: 6em;
   min-height: 2em;
   display: flex;
@@ -19,7 +19,7 @@ const HeaderContainer = styled.div`
   background-color: white;
   img {
     margin: 1em 2em 1em 1em;
-    width: 20%;
+    width: 15%;
     height: auto;
     max-width: 150px;
     &:hover {

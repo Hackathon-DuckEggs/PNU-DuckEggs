@@ -16,6 +16,15 @@ const AppContainer = styled.div`
   margin: 6em 2em;
 `;
 
+const ContentsContainer = styled.div`
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Title = styled.h3`
   font-size: 2em;
   word-break: keep-all;
@@ -160,28 +169,30 @@ export const VersusLoading = (props) => {
     );
     return (
       <AppContainer>
-        <Header />
-        <Title>상품 비교</Title>
-        <Summary>공통 키워드 점수를 비교합니다.</Summary>
-        <ProductSummaryContainer>
-          <ProductContainer>
-            <SelectedImage product={selectionFirst} />
-            <SmallTitle>{selectionFirst.description}</SmallTitle>
-          </ProductContainer>
-          <ProductContainer>
-            <SelectedImage product={selectionSecond} />
-            <SmallTitle>{selectionSecond.description}</SmallTitle>
-          </ProductContainer>
-        </ProductSummaryContainer>
-        <VersusResultContainer>
-          <KeywordVersus
-            productFirst={selectionFirst.description}
-            productSecond={selectionSecond.description}
-            sortedDataFirst={sortedDataFirst}
-            sortedDataSecond={sortedDataSecond}
-            filteredKeywords={filteredKeywords}
-          />
-        </VersusResultContainer>
+        <ContentsContainer>
+          <Header />
+          <Title>상품 비교</Title>
+          <Summary>공통 키워드 점수를 비교합니다.</Summary>
+          <ProductSummaryContainer>
+            <ProductContainer>
+              <SelectedImage product={selectionFirst} />
+              <SmallTitle>{selectionFirst.description}</SmallTitle>
+            </ProductContainer>
+            <ProductContainer>
+              <SelectedImage product={selectionSecond} />
+              <SmallTitle>{selectionSecond.description}</SmallTitle>
+            </ProductContainer>
+          </ProductSummaryContainer>
+          <VersusResultContainer>
+            <KeywordVersus
+              productFirst={selectionFirst.description}
+              productSecond={selectionSecond.description}
+              sortedDataFirst={sortedDataFirst}
+              sortedDataSecond={sortedDataSecond}
+              filteredKeywords={filteredKeywords}
+            />
+          </VersusResultContainer>
+        </ContentsContainer>
       </AppContainer>
     );
   }

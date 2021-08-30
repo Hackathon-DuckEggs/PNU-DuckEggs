@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { ExpandMore } from "@material-ui/icons";
+import { EmojiSymbolsTwoTone, ExpandMore } from "@material-ui/icons";
 import {
   Accordion,
   AccordionSummary,
@@ -60,7 +60,7 @@ export const ProductSpec = (props) => {
             {Object.keys(props.spec).map((item) => (
               <Specs>
                 <Title>{item}</Title>
-                <Contents>{props.spec[item]}</Contents>
+                <Contents>{props.spec[item].toString()}</Contents>
               </Specs>
             ))}
           </SpecContentsContainer>

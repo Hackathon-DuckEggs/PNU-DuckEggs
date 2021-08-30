@@ -67,6 +67,7 @@ const ButtonContainer = styled.div`
 `;
 
 const Button = styled.button`
+  background: #eeeeee;
   width: 100%;
   padding: 1rem 0.7rem;
   font-family: "NotoSansKR-Bold";
@@ -75,17 +76,19 @@ const Button = styled.button`
   display: flex;
   flex-direction: column;
   algin-items: space-between;
-  background: #ff9472;
+  color: #2b2b2b;
   border: none;
   border-radius: 3px;
   box-shadow: 0px 0px 0px 10px 5px black;
   &:hover {
     cursor: pointer;
+    border: 2px solid #d6d6d8;
   }
 `;
 
 export function ProductDetail(props) {
   const { previewSrc, title, pCode, spec } = props;
+  console.log(spec);
   return (
     <ProductDetailContainer>
       <ProductBasicContainer>
