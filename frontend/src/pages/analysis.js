@@ -75,7 +75,7 @@ const StyledLink = styled(Link)`
 `;
 
 const Analysis = (props) => {
-  const pCode = props.location.state["pCode"];
+  const { pCode, previewSrc, title } = props.location.state;
   const url = `http://duckegg.kro.kr/api/product/${pCode}`;
   const [data, setData] = useState(null);
   const [show, setShow] = useState(false);
@@ -126,7 +126,7 @@ const Analysis = (props) => {
           <StyledLink
             to={{
               pathname: `/review/${pCode}`,
-              state: { pCode: pCode },
+              state: { pCode },
             }}
             target="_blank"
           >

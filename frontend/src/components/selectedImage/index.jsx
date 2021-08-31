@@ -27,8 +27,17 @@ const Message = styled.span`
 
 const SelectedImage = (props) => {
   const product = props.product;
+  console.log(product);
   if (product == null) {
     return <Message>상품을 선택해주세요</Message>;
+  }
+
+  if (typeof product == "string") {
+    return (
+      <ImageContainer>
+        <img src={product} alt="previewSelected" />
+      </ImageContainer>
+    );
   }
 
   return (

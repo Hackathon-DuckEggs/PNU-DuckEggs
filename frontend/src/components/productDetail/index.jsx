@@ -1,18 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { ProductSpec } from "../productSpec";
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  &:focus,
-  &:hover,
-  &:visited,
-  &:link,
-  &:active {
-    text-decoration: none;
-  }
-`;
+import { ProductSpec } from "../productSpec";
 
 const ProductDetailContainer = styled.div`
   width: 20%;
@@ -88,7 +77,7 @@ const Button = styled.button`
 
 export function ProductDetail(props) {
   const { previewSrc, title, pCode, spec } = props;
-  console.log(spec);
+
   return (
     <ProductDetailContainer>
       <ProductBasicContainer>
@@ -97,14 +86,6 @@ export function ProductDetail(props) {
         </Preview>
         <Title>{title}</Title>
         <ButtonContainer>
-          <StyledLink
-            to={{
-              pathname: `/versus/${pCode}`,
-              state: { pCode: pCode },
-            }}
-          >
-            <Button>상품 비교하기</Button>
-          </StyledLink>
           <ProductSpec spec={spec} />
         </ButtonContainer>
       </ProductBasicContainer>

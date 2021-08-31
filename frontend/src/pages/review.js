@@ -33,13 +33,9 @@ const Review = (props) => {
   const [data, setData] = useState(null);
 
   const fetchData = async () => {
-    try {
-      const result = await fetch(url);
-      const data = await result.json();
-      setData(data);
-    } catch (err) {
-      // error handling code
-    }
+    const result = await fetch(url);
+    const data = await result.json();
+    setData(data);
   };
 
   useEffect(() => {

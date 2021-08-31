@@ -83,11 +83,9 @@ const GoButton = styled.div`
   }
 `;
 
-const Versus = (props) => {
+const Versus = () => {
   const [selectionFirst, setselectionFirst] = useState(false);
   const [selectionSecond, setselectionSecond] = useState(false);
-
-  console.log(selectionFirst);
 
   return (
     <AppContainer>

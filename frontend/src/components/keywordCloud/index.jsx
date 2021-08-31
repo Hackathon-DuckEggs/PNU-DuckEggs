@@ -8,7 +8,7 @@ const options = {
   enableTooltip: true,
   deterministic: false,
   fontFamily: "NotoSansKR-Black",
-  fontSizes: [50, 100],
+  fontSizes: [50, 200],
   fontStyle: "normal",
   fontWeight: "700",
   padding: 1,
