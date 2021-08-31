@@ -1,6 +1,17 @@
-import { ContactsOutlined, LiveTvRounded } from "@material-ui/icons";
 import React from "react";
+import styled from "styled-components";
 import { Chart } from "react-google-charts";
+
+const WarningMessage = styled.h3`
+  font-size: 2em;
+  word-break: keep-all;
+  text-align: center;
+  color: #383838;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  algin-items: center;
+`;
 
 const KeywordVersus = (props) => {
   const {
@@ -36,7 +47,9 @@ const KeywordVersus = (props) => {
     ]);
   });
 
-  console.log(versusData);
+  if (!versusData) {
+    return <WarningMessage>공통 키워드가 없습니다!</WarningMessage>;
+  }
   return (
     <Chart
       width={"1000px"}
