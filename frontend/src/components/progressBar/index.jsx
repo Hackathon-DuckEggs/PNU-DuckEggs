@@ -37,7 +37,7 @@ const ProgressDone = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: 10%;
   width: 0;
   opacity: 0;
   transition: 1s ease 0.3s;
