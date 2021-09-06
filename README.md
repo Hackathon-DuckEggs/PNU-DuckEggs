@@ -10,6 +10,8 @@ cd frontend
 yarn start
 ```
 
+또는 http://duckegg.kro.kr/ 로 접속
+
 ## 주요기능
 - __제품 검색__ 
 ![search_page](https://user-images.githubusercontent.com/74234333/131425431-be1fddf6-8613-46ed-9c2e-8c436848f8de.gif)
@@ -46,11 +48,9 @@ yarn start
 
 ## 기술 스택
 ### Backend
-- NodeJS + ExpressJS (서버)
+- NodeJS + ExpressJS (Server)
 - MongoDB (DB)
 ### ML
 - Tensorflow (ML)
 ### Frontend
 - React (FE)
-
-## 향후 계획
