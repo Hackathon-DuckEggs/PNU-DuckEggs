@@ -34,7 +34,7 @@ yarn start
  검색한 두 제품의 상위 키워드 10개 중, 공통 키워드에 대하여 점수 비교 결과를 확인할 수 있습니다.
  
 ## 개발자
-- 개발기간 : 2021.06~2021.09
+- 개발기간 : 2021.06~2021.08
 
 |개발자|역할|
 |:------:|:---:|
@@ -52,3 +52,6 @@ yarn start
 - Tensorflow (ML)
 ### Frontend
 - React (FE)
+
+## 시연영상
+https://www.youtube.com/watch?v=vgwzePL-Ebs&t=1s
